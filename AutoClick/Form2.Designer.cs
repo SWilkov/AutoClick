@@ -46,6 +46,7 @@
       this.lblErrorMessage = new System.Windows.Forms.Label();
       this.grpBoxRepeat = new System.Windows.Forms.GroupBox();
       this.numRepeats = new System.Windows.Forms.NumericUpDown();
+      this.lblF = new System.Windows.Forms.Label();
       this.panel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
@@ -62,7 +63,7 @@
       // 
       this.btnStart.BackColor = System.Drawing.Color.SpringGreen;
       this.btnStart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.btnStart.Location = new System.Drawing.Point(16, 78);
+      this.btnStart.Location = new System.Drawing.Point(16, 79);
       this.btnStart.Name = "btnStart";
       this.btnStart.Size = new System.Drawing.Size(250, 120);
       this.btnStart.TabIndex = 4;
@@ -239,11 +240,21 @@
       this.numRepeats.Size = new System.Drawing.Size(300, 47);
       this.numRepeats.TabIndex = 0;
       // 
+      // lblF
+      // 
+      this.lblF.AutoSize = true;
+      this.lblF.Location = new System.Drawing.Point(45, 587);
+      this.lblF.Name = "lblF";
+      this.lblF.Size = new System.Drawing.Size(213, 41);
+      this.lblF.TabIndex = 18;
+      this.lblF.Text = "pressed key = ";
+      // 
       // Form2
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1308, 993);
+      this.Controls.Add(this.lblF);
       this.Controls.Add(this.grpBoxRepeat);
       this.Controls.Add(this.lblErrorMessage);
       this.Controls.Add(this.numMilliseconds);
@@ -252,8 +263,11 @@
       this.Controls.Add(this.numHours);
       this.Controls.Add(this.grpBoxActions);
       this.Controls.Add(this.panel1);
+      this.KeyPreview = true;
       this.Name = "Form2";
       this.Text = "Form2";
+      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
+      this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form2_KeyPress);
       this.panel1.ResumeLayout(false);
       this.panel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
@@ -293,5 +307,6 @@
     private Label lblErrorMessage;
     private GroupBox grpBoxRepeat;
     private NumericUpDown numRepeats;
+    private Label lblF;
   }
 }

@@ -6,6 +6,7 @@ namespace MouseSimulator.Native
 {
   internal enum InputType : uint
   {
-    Mouse = 0
+    Mouse = 0,
+    Keyboard = 1
   }
 }

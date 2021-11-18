@@ -11,5 +11,7 @@
       if (this.TimePeriodTimer == null)
         this.TimePeriodTimer = new System.Windows.Forms.Timer();
     }
+
+
   }
 }
