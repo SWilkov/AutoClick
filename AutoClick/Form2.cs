@@ -68,6 +68,8 @@ namespace AutoClick
       var startCommand = new StartAutoClickCommand(timeFrame, config);
 
       _startAutoClickHandler.Handle(startCommand);
+
+      lblF.Text = "Started";
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -127,8 +129,23 @@ namespace AutoClick
       _stopAutoClickHandler.Handle(cmd);
     }
 
+
     #endregion
 
-   
+    private void Form2_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      
+    }
+
+    private void Form2_KeyDown(object sender, KeyEventArgs e)
+    {
+      //TODO this only works when the form is in focus. Need to add a keyboard hook to activate at anytime
+      if (e.KeyCode == Keys.F10)
+      {
+        var stopCommand = new StopAutoClickCommand();
+        _stopAutoClickHandler.Handle(stopCommand);
+        lblF.Text = "Stopped";
+      }
+    }
   }
 }

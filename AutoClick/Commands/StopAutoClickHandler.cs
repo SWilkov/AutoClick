@@ -23,6 +23,11 @@ namespace AutoClick.Commands
 
       _timer.IntervalTimer.Stop();
       command.StoppedAt = DateTime.Now;
+
+      if (_timer.TimePeriodTimer != null && _timer.TimePeriodTimer.Enabled)
+      {
+        _timer.TimePeriodTimer.Stop();
+      }
     }
   }
 }
