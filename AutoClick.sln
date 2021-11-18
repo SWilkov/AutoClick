@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoClick", "AutoClick\AutoClick.csproj", "{7C900FAC-33D4-4124-ABDB-D73437E22419}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseSimulator", "MouseSimulator\MouseSimulator.csproj", "{FDC8ACE2-9E73-441F-B214-D9E3119B098B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5CFD1F67-4A97-451B-9309-8D5AECFBD2B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Utils", "AC.Utils\AC.Utils.csproj", "{2A64E016-1283-4035-84B6-1970ACE2F9F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Framework", "AC.Framework\AC.Framework.csproj", "{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoClickTests", "AutoClickTests\AutoClickTests.csproj", "{A7304DEA-02C6-4B7B-B93B-F926C0045D28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C900FAC-33D4-4124-ABDB-D73437E22419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C900FAC-33D4-4124-ABDB-D73437E22419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C900FAC-33D4-4124-ABDB-D73437E22419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C900FAC-33D4-4124-ABDB-D73437E22419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC8ACE2-9E73-441F-B214-D9E3119B098B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC8ACE2-9E73-441F-B214-D9E3119B098B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC8ACE2-9E73-441F-B214-D9E3119B098B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC8ACE2-9E73-441F-B214-D9E3119B098B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A64E016-1283-4035-84B6-1970ACE2F9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A64E016-1283-4035-84B6-1970ACE2F9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A64E016-1283-4035-84B6-1970ACE2F9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A64E016-1283-4035-84B6-1970ACE2F9F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FDC8ACE2-9E73-441F-B214-D9E3119B098B} = {12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}
+		{2A64E016-1283-4035-84B6-1970ACE2F9F1} = {12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}
+		{3E616FBF-B50A-4C7F-A16B-679D6D945B3E} = {12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}
+		{A7304DEA-02C6-4B7B-B93B-F926C0045D28} = {5CFD1F67-4A97-451B-9309-8D5AECFBD2B9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9027431-9F0B-44A6-938F-9476E1427A69}
+	EndGlobalSection
+EndGlobal
