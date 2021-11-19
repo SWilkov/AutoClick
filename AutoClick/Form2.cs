@@ -80,22 +80,47 @@ namespace AutoClick
 
     private void numHours_Validating(object sender, CancelEventArgs e)
     {
-      //Validate();
+      if ((_setup.Interval.Hours > 0 || _setup.Interval.Minutes > 0 || _setup.Interval.Seconds > 0) && _setup.Interval.Milliseconds > 0)
+        errProvMilliseconds.SetError(numMilliseconds, "Set only Milliseconds or hours");
+      else
+      {
+        errProvMilliseconds.SetError(numMilliseconds, "");
+        errProvMilliseconds.Clear();
+      }
     }
 
     private void numMinutes_Validating(object sender, CancelEventArgs e)
     {
-      //Validate();
+      if ((_setup.Interval.Hours > 0 || _setup.Interval.Minutes > 0 || _setup.Interval.Seconds > 0) && _setup.Interval.Milliseconds > 0)
+        errProvMilliseconds.SetError(numMilliseconds, "Set only Milliseconds or minutes");
+      else
+      {
+        errProvMilliseconds.SetError(numMilliseconds, "");
+        errProvMilliseconds.Clear();
+      }
     }
 
     private void numSeconds_Validating(object sender, CancelEventArgs e)
     {
-      //Validate();
+      if ((_setup.Interval.Hours > 0 || _setup.Interval.Minutes > 0 || _setup.Interval.Seconds > 0) && _setup.Interval.Milliseconds > 0)
+        errProvMilliseconds.SetError(numMilliseconds, "Set only Milliseconds or seconds");
+      else
+      {
+        errProvMilliseconds.SetError(numMilliseconds, "");
+        errProvMilliseconds.Clear();
+      }
     }
 
     private void numMilliseconds_Validating(object sender, CancelEventArgs e)
     {
-      //Validate();
+      if ((_setup.Interval.Hours > 0 || _setup.Interval.Minutes > 0 || _setup.Interval.Seconds > 0) &&
+         _setup.Interval.Milliseconds > 0)
+        errProvMilliseconds.SetError(numMilliseconds, "Set only Milliseconds or hours/minutes/seconds");
+      else 
+      {
+        errProvMilliseconds.SetError(numMilliseconds, "");
+        errProvMilliseconds.Clear();
+      }
     }
 
     #region DataBinding
@@ -126,9 +151,14 @@ namespace AutoClick
       var validation = _validator.Validate(_setup);
       if (validation != null && validation.Result == ValidationResult.Invalid)
       {
-        Console.WriteLine($"{validation.Message}");
-        lblErrorMessage.Text = validation.Message;
+        errProvMilliseconds.SetError(numMilliseconds, validation.Message);
+        return;
       }
+      else
+      {
+        errProvMilliseconds.SetError(numMilliseconds, "");
+        errProvMilliseconds.Clear();
+      }  
 
       var timeFrame = _timeFrameFactory.Get(_setup);
       var timeIntervalCommand = new TimerIntervalCommand(_setup);

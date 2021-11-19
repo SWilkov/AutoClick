@@ -56,6 +56,7 @@
       this.lblTotalClicks = new System.Windows.Forms.Label();
       this.lblTotalClicksName = new System.Windows.Forms.Label();
       this.grpBoxLocation = new System.Windows.Forms.GroupBox();
+      this.errProvMilliseconds = new System.Windows.Forms.ErrorProvider(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -68,6 +69,7 @@
       this.groupBox1.SuspendLayout();
       this.grpBoxStats.SuspendLayout();
       this.grpBoxLocation.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.errProvMilliseconds)).BeginInit();
       this.SuspendLayout();
       // 
       // btnStart
@@ -366,6 +368,10 @@
       this.grpBoxLocation.TabStop = false;
       this.grpBoxLocation.Text = "Location";
       // 
+      // errProvMilliseconds
+      // 
+      this.errProvMilliseconds.ContainerControl = this;
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
@@ -397,6 +403,7 @@
       this.grpBoxStats.PerformLayout();
       this.grpBoxLocation.ResumeLayout(false);
       this.grpBoxLocation.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.errProvMilliseconds)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -435,5 +442,6 @@
     private Label lblTotalClicks;
     private Label lblTotalClicksName;
     private GroupBox grpBoxLocation;
+    private ErrorProvider errProvMilliseconds;
   }
 }
