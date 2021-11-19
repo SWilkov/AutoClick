@@ -12,6 +12,7 @@ namespace AutoClick.Services.Timer
     private readonly AutoClickTimer _timer;
     private readonly ICommandHandler<TimerIntervalCommand> _intervalHandler;
     private readonly IMouseActionService _mouseActionService;
+    //private readonly IStatsService _statsService;
 
     public RepeatTimeService(AutoClickTimer timer,
       ICommandHandler<TimerIntervalCommand> intervalHandler,
@@ -42,7 +43,8 @@ namespace AutoClick.Services.Timer
         //Left mouse button click
         _mouseActionService.LeftMouseButtonDown();
         _mouseActionService.LeftMouseButtonUp();
-
+        //_statsService.AddToClicks();
+        ClickStats.Instance.Add();
         count++;
       };
 

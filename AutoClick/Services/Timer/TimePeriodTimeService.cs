@@ -47,6 +47,7 @@ namespace AutoClick.Services.Timer
       {
         _mouseActionService.LeftMouseButtonDown();
         _mouseActionService.LeftMouseButtonUp();
+        //_statsService.AddToClicks();
       };
 
       _timer.TimePeriodTimer.Tick += (sender, args) =>
