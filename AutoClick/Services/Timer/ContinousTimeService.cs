@@ -16,7 +16,7 @@ namespace AutoClick.Services.Timer
   {
     private readonly AutoClickTimer _timer;
     private readonly IMouseActionService _mouseActionService;
-
+    //private readonly IStatsService _statsService;
     public ContinousTimeService(AutoClickTimer timer,
       IMouseActionService mouseActionService)
     {
@@ -36,6 +36,8 @@ namespace AutoClick.Services.Timer
       {
         _mouseActionService.LeftMouseButtonDown();
         _mouseActionService.LeftMouseButtonUp();
+
+        //_statsService.AddToClicks();
       };
 
       _timer.IntervalTimer.Start();

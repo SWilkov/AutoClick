@@ -3,6 +3,7 @@ using AC.Utils.Interfaces;
 using AutoClick.Commands;
 using AutoClick.Interfaces;
 using AutoClick.Models;
+using AutoClick.Services;
 using Microsoft.Extensions.DependencyInjection;
 using MouseSimulator;
 using MouseSimulator.Interfaces;
@@ -71,6 +72,7 @@ namespace AutoClick.Extensions
 
       #region Services
       services.AddSingleton<IMouseActionService, MouseActionService>();
+      //services.AddSingleton<IStatsService, StatsService>();
       #endregion
 
       services.AddSingleton<AutoClickTimer>((sp) =>

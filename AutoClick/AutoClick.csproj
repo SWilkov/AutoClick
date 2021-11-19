@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\TimerUtils.cs" />
+    <Compile Remove="Services\StatsService.cs" />
   </ItemGroup>
 
   <ItemGroup>
