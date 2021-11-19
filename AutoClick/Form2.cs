@@ -154,6 +154,17 @@ namespace AutoClick
       btnStart.Enabled = true;
       btnStop.Enabled = false;
     }
+
+    private void btnStop_EnabledChanged(object sender, EventArgs e)
+    {
+      btnStop.BackColor = btnStop.Enabled ? Color.Red : Color.DarkGray;
+    }
+
+    private void btnStart_EnabledChanged(object sender, EventArgs e)
+    {
+      btnStart.BackColor = btnStart.Enabled ? Color.SpringGreen : Color.DarkGray;
+    }
+
     #endregion
 
     private void Form2_KeyPress(object sender, KeyPressEventArgs e)
@@ -175,6 +186,11 @@ namespace AutoClick
     private void btnResetStats_Click(object sender, EventArgs e)
     {
       ClickStats.Instance.Reset(); 
+    }
+
+    private void lblMilliseconds_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }

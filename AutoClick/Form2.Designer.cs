@@ -32,7 +32,6 @@
       this.btnStart = new System.Windows.Forms.Button();
       this.btnStop = new System.Windows.Forms.Button();
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.panel1 = new System.Windows.Forms.Panel();
       this.lblYLocation = new System.Windows.Forms.Label();
       this.lblXLocation = new System.Windows.Forms.Label();
       this.numY = new System.Windows.Forms.NumericUpDown();
@@ -56,7 +55,7 @@
       this.btnResetStats = new System.Windows.Forms.Button();
       this.lblTotalClicks = new System.Windows.Forms.Label();
       this.lblTotalClicksName = new System.Windows.Forms.Label();
-      this.panel1.SuspendLayout();
+      this.grpBoxLocation = new System.Windows.Forms.GroupBox();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -68,6 +67,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.numRepeats)).BeginInit();
       this.groupBox1.SuspendLayout();
       this.grpBoxStats.SuspendLayout();
+      this.grpBoxLocation.SuspendLayout();
       this.SuspendLayout();
       // 
       // btnStart
@@ -80,11 +80,12 @@
       this.btnStart.TabIndex = 4;
       this.btnStart.Text = "Start";
       this.btnStart.UseVisualStyleBackColor = false;
+      this.btnStart.EnabledChanged += new System.EventHandler(this.btnStart_EnabledChanged);
       this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
       // 
       // btnStop
       // 
-      this.btnStop.BackColor = System.Drawing.Color.Red;
+      this.btnStop.BackColor = System.Drawing.Color.DarkGray;
       this.btnStop.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.btnStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
       this.btnStop.Location = new System.Drawing.Point(581, 78);
@@ -93,6 +94,7 @@
       this.btnStop.TabIndex = 5;
       this.btnStop.Text = "Stop";
       this.btnStop.UseVisualStyleBackColor = false;
+      this.btnStop.EnabledChanged += new System.EventHandler(this.btnStop_EnabledChanged);
       this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
       // 
       // contextMenuStrip1
@@ -101,40 +103,30 @@
       this.contextMenuStrip1.Name = "contextMenuStrip1";
       this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
       // 
-      // panel1
-      // 
-      this.panel1.Controls.Add(this.lblYLocation);
-      this.panel1.Controls.Add(this.lblXLocation);
-      this.panel1.Controls.Add(this.numY);
-      this.panel1.Controls.Add(this.numX);
-      this.panel1.Controls.Add(this.chkCurrentLocation);
-      this.panel1.Location = new System.Drawing.Point(623, 358);
-      this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(633, 252);
-      this.panel1.TabIndex = 10;
-      // 
       // lblYLocation
       // 
       this.lblYLocation.AutoSize = true;
-      this.lblYLocation.Location = new System.Drawing.Point(363, 110);
+      this.lblYLocation.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.lblYLocation.Location = new System.Drawing.Point(236, 144);
       this.lblYLocation.Name = "lblYLocation";
-      this.lblYLocation.Size = new System.Drawing.Size(35, 41);
+      this.lblYLocation.Size = new System.Drawing.Size(36, 41);
       this.lblYLocation.TabIndex = 4;
       this.lblYLocation.Text = "Y";
       // 
       // lblXLocation
       // 
       this.lblXLocation.AutoSize = true;
+      this.lblXLocation.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.lblXLocation.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-      this.lblXLocation.Location = new System.Drawing.Point(42, 111);
+      this.lblXLocation.Location = new System.Drawing.Point(50, 144);
       this.lblXLocation.Name = "lblXLocation";
-      this.lblXLocation.Size = new System.Drawing.Size(36, 41);
+      this.lblXLocation.Size = new System.Drawing.Size(38, 41);
       this.lblXLocation.TabIndex = 3;
       this.lblXLocation.Text = "X";
       // 
       // numY
       // 
-      this.numY.Location = new System.Drawing.Point(362, 165);
+      this.numY.Location = new System.Drawing.Point(236, 188);
       this.numY.Name = "numY";
       this.numY.Size = new System.Drawing.Size(140, 47);
       this.numY.TabIndex = 2;
@@ -142,7 +134,7 @@
       // 
       // numX
       // 
-      this.numX.Location = new System.Drawing.Point(41, 161);
+      this.numX.Location = new System.Drawing.Point(50, 188);
       this.numX.Name = "numX";
       this.numX.Size = new System.Drawing.Size(140, 47);
       this.numX.TabIndex = 1;
@@ -153,7 +145,7 @@
       this.chkCurrentLocation.AutoSize = true;
       this.chkCurrentLocation.Checked = true;
       this.chkCurrentLocation.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.chkCurrentLocation.Location = new System.Drawing.Point(17, 24);
+      this.chkCurrentLocation.Location = new System.Drawing.Point(50, 55);
       this.chkCurrentLocation.Name = "chkCurrentLocation";
       this.chkCurrentLocation.Size = new System.Drawing.Size(318, 45);
       this.chkCurrentLocation.TabIndex = 0;
@@ -181,9 +173,9 @@
       // 
       // numMinutes
       // 
-      this.numMinutes.Location = new System.Drawing.Point(414, 97);
+      this.numMinutes.Location = new System.Drawing.Point(390, 99);
       this.numMinutes.Name = "numMinutes";
-      this.numMinutes.Size = new System.Drawing.Size(300, 47);
+      this.numMinutes.Size = new System.Drawing.Size(250, 47);
       this.numMinutes.TabIndex = 13;
       this.numMinutes.Validating += new System.ComponentModel.CancelEventHandler(this.numMinutes_Validating);
       // 
@@ -195,9 +187,9 @@
             0,
             0,
             65536});
-      this.numSeconds.Location = new System.Drawing.Point(791, 97);
+      this.numSeconds.Location = new System.Drawing.Point(750, 99);
       this.numSeconds.Name = "numSeconds";
-      this.numSeconds.Size = new System.Drawing.Size(300, 47);
+      this.numSeconds.Size = new System.Drawing.Size(250, 47);
       this.numSeconds.TabIndex = 14;
       this.numSeconds.Validating += new System.ComponentModel.CancelEventHandler(this.numSeconds_Validating);
       // 
@@ -215,7 +207,7 @@
             0,
             0});
       this.numMilliseconds.Name = "numMilliseconds";
-      this.numMilliseconds.Size = new System.Drawing.Size(300, 47);
+      this.numMilliseconds.Size = new System.Drawing.Size(250, 47);
       this.numMilliseconds.TabIndex = 15;
       this.numMilliseconds.Validating += new System.ComponentModel.CancelEventHandler(this.numMilliseconds_Validating);
       // 
@@ -240,40 +232,43 @@
       // 
       // numRepeats
       // 
-      this.numRepeats.Location = new System.Drawing.Point(57, 119);
+      this.numRepeats.Location = new System.Drawing.Point(64, 118);
       this.numRepeats.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
       this.numRepeats.Name = "numRepeats";
-      this.numRepeats.Size = new System.Drawing.Size(300, 47);
+      this.numRepeats.Size = new System.Drawing.Size(250, 47);
       this.numRepeats.TabIndex = 0;
       // 
       // lblHours
       // 
       this.lblHours.AutoSize = true;
+      this.lblHours.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.lblHours.Location = new System.Drawing.Point(53, 55);
       this.lblHours.Name = "lblHours";
-      this.lblHours.Size = new System.Drawing.Size(97, 41);
+      this.lblHours.Size = new System.Drawing.Size(102, 41);
       this.lblHours.TabIndex = 18;
       this.lblHours.Text = "Hours";
       // 
       // lblMinutes
       // 
       this.lblMinutes.AutoSize = true;
-      this.lblMinutes.Location = new System.Drawing.Point(403, 43);
+      this.lblMinutes.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.lblMinutes.Location = new System.Drawing.Point(390, 55);
       this.lblMinutes.Name = "lblMinutes";
-      this.lblMinutes.Size = new System.Drawing.Size(125, 41);
+      this.lblMinutes.Size = new System.Drawing.Size(133, 41);
       this.lblMinutes.TabIndex = 19;
       this.lblMinutes.Text = "Minutes";
       // 
       // lblSeconds
       // 
       this.lblSeconds.AutoSize = true;
-      this.lblSeconds.Location = new System.Drawing.Point(782, 43);
+      this.lblSeconds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.lblSeconds.Location = new System.Drawing.Point(741, 55);
       this.lblSeconds.Name = "lblSeconds";
-      this.lblSeconds.Size = new System.Drawing.Size(130, 41);
+      this.lblSeconds.Size = new System.Drawing.Size(133, 41);
       this.lblSeconds.TabIndex = 20;
       this.lblSeconds.Text = "Seconds";
       // 
@@ -299,6 +294,7 @@
       // 
       this.lblIntervalHelp.AutoSize = true;
       this.lblIntervalHelp.Location = new System.Drawing.Point(407, 184);
+      this.lblIntervalHelp.MaximumSize = new System.Drawing.Size(500, 100);
       this.lblIntervalHelp.Name = "lblIntervalHelp";
       this.lblIntervalHelp.Size = new System.Drawing.Size(97, 41);
       this.lblIntervalHelp.TabIndex = 22;
@@ -307,11 +303,13 @@
       // lblMilliseconds
       // 
       this.lblMilliseconds.AutoSize = true;
+      this.lblMilliseconds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.lblMilliseconds.Location = new System.Drawing.Point(53, 165);
       this.lblMilliseconds.Name = "lblMilliseconds";
-      this.lblMilliseconds.Size = new System.Drawing.Size(182, 41);
+      this.lblMilliseconds.Size = new System.Drawing.Size(194, 41);
       this.lblMilliseconds.TabIndex = 21;
       this.lblMilliseconds.Text = "Milliseconds";
+      this.lblMilliseconds.Click += new System.EventHandler(this.lblMilliseconds_Click);
       // 
       // grpBoxStats
       // 
@@ -354,24 +352,36 @@
       this.lblTotalClicksName.TabIndex = 0;
       this.lblTotalClicksName.Text = "click count";
       // 
+      // grpBoxLocation
+      // 
+      this.grpBoxLocation.Controls.Add(this.numX);
+      this.grpBoxLocation.Controls.Add(this.numY);
+      this.grpBoxLocation.Controls.Add(this.lblYLocation);
+      this.grpBoxLocation.Controls.Add(this.chkCurrentLocation);
+      this.grpBoxLocation.Controls.Add(this.lblXLocation);
+      this.grpBoxLocation.Location = new System.Drawing.Point(673, 372);
+      this.grpBoxLocation.Name = "grpBoxLocation";
+      this.grpBoxLocation.Size = new System.Drawing.Size(500, 250);
+      this.grpBoxLocation.TabIndex = 23;
+      this.grpBoxLocation.TabStop = false;
+      this.grpBoxLocation.Text = "Location";
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1308, 1190);
+      this.Controls.Add(this.grpBoxLocation);
       this.Controls.Add(this.grpBoxStats);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.grpBoxRepeat);
       this.Controls.Add(this.lblErrorMessage);
       this.Controls.Add(this.grpBoxActions);
-      this.Controls.Add(this.panel1);
       this.KeyPreview = true;
       this.Name = "formAutoClick";
       this.Text = "Auto Clicker";
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
       this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form2_KeyPress);
-      this.panel1.ResumeLayout(false);
-      this.panel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
       this.grpBoxActions.ResumeLayout(false);
@@ -385,6 +395,8 @@
       this.groupBox1.PerformLayout();
       this.grpBoxStats.ResumeLayout(false);
       this.grpBoxStats.PerformLayout();
+      this.grpBoxLocation.ResumeLayout(false);
+      this.grpBoxLocation.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -399,7 +411,6 @@
     private Button btnStart;
     private Button btnStop;
     private ContextMenuStrip contextMenuStrip1;
-    private Panel panel1;
     private GroupBox grpBoxActions;
     private Label lblYLocation;
     private Label lblXLocation;
@@ -423,5 +434,6 @@
     private Button btnResetStats;
     private Label lblTotalClicks;
     private Label lblTotalClicksName;
+    private GroupBox grpBoxLocation;
   }
 }
