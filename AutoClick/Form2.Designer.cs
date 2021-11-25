@@ -1,6 +1,6 @@
 ﻿namespace AutoClick
 {
-  partial class formAutoClick
+  partial class AutoClickForm
   {
     /// <summary>
     /// Required designer variable.

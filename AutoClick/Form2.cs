@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace AutoClick
 {
-  public partial class formAutoClick : Form
+  public partial class AutoClickForm : Form
   {
     private readonly Setup _setup;
     
@@ -20,7 +20,7 @@ namespace AutoClick
     //private readonly IStatsService _statsService;
        
 
-    public formAutoClick(IValidator<Setup> validator,
+    public AutoClickForm(IValidator<Setup> validator,
       IMousePositionService mousePositionService,
       ICommandHandler<StartAutoClickCommand> starAutoClickHandler,
       ITimeFrameFactory timeFrameFactory,

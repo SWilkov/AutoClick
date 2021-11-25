@@ -14,14 +14,13 @@ namespace AutoClick
       var services = new ServiceCollection();
 
       services.AddAutoClickServices();
-      services.AddScoped<formAutoClick>();
+      services.AddScoped<AutoClickForm>();
 
       using(ServiceProvider sp = services.BuildServiceProvider())
       {
         ApplicationConfiguration.Initialize();
-        var form2 = sp.GetRequiredService<formAutoClick>();
+        var form2 = sp.GetRequiredService<AutoClickForm>();
         Application.Run(form2);
-
       }
     }
   }
