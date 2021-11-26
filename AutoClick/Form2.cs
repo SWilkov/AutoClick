@@ -17,6 +17,7 @@ namespace AutoClick
     private readonly ICommandHandler<StartAutoClickCommand> _startAutoClickHandler;
     private readonly ITimeFrameFactory _timeFrameFactory;
     private readonly ICommandHandler<TimerIntervalCommand> _timeIntervalHandler;
+    private readonly IUserSettingsService _userSettingsService;
     private readonly ICommandHandler<StopAutoClickCommand> _stopAutoClickHandler;
 
     private const int STOPCLICKS_HOTKEY_ID = 1;
@@ -28,7 +29,8 @@ namespace AutoClick
       ICommandHandler<StartAutoClickCommand> starAutoClickHandler,
       ITimeFrameFactory timeFrameFactory,
       ICommandHandler<TimerIntervalCommand> timeIntervalHandler,
-      ICommandHandler<StopAutoClickCommand> stopAutoClickHandler)
+      ICommandHandler<StopAutoClickCommand> stopAutoClickHandler,
+      IUserSettingsService userSettingsService)
     {
       InitializeComponent();
       _setup = new Setup();
@@ -39,6 +41,7 @@ namespace AutoClick
       _stopAutoClickHandler = stopAutoClickHandler;
       _timeFrameFactory = timeFrameFactory;
       _timeIntervalHandler = timeIntervalHandler;
+      _userSettingsService = userSettingsService;
 
       Methods.RegisterHotKey(this.Handle, STOPCLICKS_HOTKEY_ID, (int)Modifiers.Ctrl, (int)VirtualKeyCodes.F8);
       //Methods.UnregisterHotKey()
@@ -48,6 +51,8 @@ namespace AutoClick
       this.lblIntervalHelp.Text = "Set hours, minutes, seconds or milliseconds if both are detected milliseconds will be used.";
       this.btnStop.Enabled = false;
 
+      this.btnStop.Text = $"Stop (Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
+
       ClickStats.Instance.PropertyChanged += (s, e) =>
       {
         Console.WriteLine(e.PropertyName);
@@ -56,9 +61,10 @@ namespace AutoClick
 
     protected override void WndProc(ref Message m)
     {
-      if (m.Msg == 0x0312 && m.WParam.ToInt32() == STOPCLICKS_HOTKEY_ID)
+      if (m.Msg == (int)Specials.WM_HOTKEY && m.WParam.ToInt32() == STOPCLICKS_HOTKEY_ID)
       {
-        
+        //Stop the autoclicker
+        _stopAutoClickHandler.Handle(new StopAutoClickCommand());
       }
       
       base.WndProc(ref m);
@@ -212,6 +218,15 @@ namespace AutoClick
     private void lblMilliseconds_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void btnHotKey_Click(object sender, EventArgs e)
+    {
+      var settingsform = new SettingsForm();
+      settingsform.Show();
+
+      FormState.PreviousPage = this;
+      this.Hide();
     }
   }
 }

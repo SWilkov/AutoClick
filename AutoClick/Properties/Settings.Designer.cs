@@ -25,10 +25,10 @@ namespace AutoClick.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F10")]
-        public string StopKey {
+        [global::System.Configuration.DefaultSettingValueAttribute("121")]
+        public int StopKey {
             get {
-                return ((string)(this["StopKey"]));
+                return ((int)(this["StopKey"]));
             }
             set {
                 this["StopKey"] = value;

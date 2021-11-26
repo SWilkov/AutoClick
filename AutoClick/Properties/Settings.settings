@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AutoClick.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="StopKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F10</Value>
+    <Setting Name="StopKey" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">121</Value>
     </Setting>
   </Settings>
 </SettingsFile>

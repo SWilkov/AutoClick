@@ -3,6 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AutoClick
 {
+  internal static class FormState
+  {
+    public static Form PreviousPage;
+  }
+
   internal static class Program
   {
     /// <summary>
