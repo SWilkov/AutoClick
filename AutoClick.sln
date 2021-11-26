@@ -7,15 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoClick", "AutoClick\Auto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseSimulator", "MouseSimulator\MouseSimulator.csproj", "{FDC8ACE2-9E73-441F-B214-D9E3119B098B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MouseSimulator", "MouseSimulator\MouseSimulator.csproj", "{FDC8ACE2-9E73-441F-B214-D9E3119B098B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5CFD1F67-4A97-451B-9309-8D5AECFBD2B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Utils", "AC.Utils\AC.Utils.csproj", "{2A64E016-1283-4035-84B6-1970ACE2F9F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AC.Utils", "AC.Utils\AC.Utils.csproj", "{2A64E016-1283-4035-84B6-1970ACE2F9F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Framework", "AC.Framework\AC.Framework.csproj", "{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AC.Framework", "AC.Framework\AC.Framework.csproj", "{3E616FBF-B50A-4C7F-A16B-679D6D945B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoClickTests", "AutoClickTests\AutoClickTests.csproj", "{A7304DEA-02C6-4B7B-B93B-F926C0045D28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoClickTests", "AutoClickTests\AutoClickTests.csproj", "{A7304DEA-02C6-4B7B-B93B-F926C0045D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardSimulator", "KeyboardSimulator\KeyboardSimulator.csproj", "{EA0AD99B-570D-4D36-AF4E-0DE576B121EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7304DEA-02C6-4B7B-B93B-F926C0045D28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA0AD99B-570D-4D36-AF4E-0DE576B121EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA0AD99B-570D-4D36-AF4E-0DE576B121EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA0AD99B-570D-4D36-AF4E-0DE576B121EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA0AD99B-570D-4D36-AF4E-0DE576B121EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{2A64E016-1283-4035-84B6-1970ACE2F9F1} = {12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}
 		{3E616FBF-B50A-4C7F-A16B-679D6D945B3E} = {12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}
 		{A7304DEA-02C6-4B7B-B93B-F926C0045D28} = {5CFD1F67-4A97-451B-9309-8D5AECFBD2B9}
+		{EA0AD99B-570D-4D36-AF4E-0DE576B121EF} = {12E5BF1A-5131-4B8A-920A-B9E2F4EB642F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9027431-9F0B-44A6-938F-9476E1427A69}

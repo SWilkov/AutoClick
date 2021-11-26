@@ -56,6 +56,7 @@
       this.lblTotalClicks = new System.Windows.Forms.Label();
       this.lblTotalClicksName = new System.Windows.Forms.Label();
       this.grpBoxLocation = new System.Windows.Forms.GroupBox();
+      this.btnHotKey = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -88,11 +89,11 @@
       this.btnStop.BackColor = System.Drawing.Color.DarkGray;
       this.btnStop.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.btnStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.btnStop.Location = new System.Drawing.Point(581, 78);
+      this.btnStop.Location = new System.Drawing.Point(581, 51);
       this.btnStop.Name = "btnStop";
-      this.btnStop.Size = new System.Drawing.Size(250, 120);
+      this.btnStop.Size = new System.Drawing.Size(250, 150);
       this.btnStop.TabIndex = 5;
-      this.btnStop.Text = "Stop";
+      this.btnStop.Text = "Stop   Ctrl + F12";
       this.btnStop.UseVisualStyleBackColor = false;
       this.btnStop.EnabledChanged += new System.EventHandler(this.btnStop_EnabledChanged);
       this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
@@ -366,11 +367,22 @@
       this.grpBoxLocation.TabStop = false;
       this.grpBoxLocation.Text = "Location";
       // 
+      // btnHotKey
+      // 
+      this.btnHotKey.Location = new System.Drawing.Point(1054, 851);
+      this.btnHotKey.Name = "btnHotKey";
+      this.btnHotKey.Size = new System.Drawing.Size(217, 88);
+      this.btnHotKey.TabIndex = 24;
+      this.btnHotKey.Text = "Set Stop Key";
+      this.btnHotKey.UseVisualStyleBackColor = true;
+      this.btnHotKey.Click += new System.EventHandler(this.btnHotKey_Click);
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1308, 1190);
+      this.Controls.Add(this.btnHotKey);
       this.Controls.Add(this.grpBoxLocation);
       this.Controls.Add(this.grpBoxStats);
       this.Controls.Add(this.groupBox1);
@@ -435,5 +447,6 @@
     private Label lblTotalClicks;
     private Label lblTotalClicksName;
     private GroupBox grpBoxLocation;
+    private Button btnHotKey;
   }
 }
