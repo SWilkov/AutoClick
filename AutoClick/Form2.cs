@@ -4,6 +4,7 @@ using AC.Utils.Models;
 using AutoClick.Commands;
 using AutoClick.Interfaces;
 using System.ComponentModel;
+using KeyboardSimulator.Native;
 
 namespace AutoClick
 {
@@ -17,6 +18,8 @@ namespace AutoClick
     private readonly ITimeFrameFactory _timeFrameFactory;
     private readonly ICommandHandler<TimerIntervalCommand> _timeIntervalHandler;
     private readonly ICommandHandler<StopAutoClickCommand> _stopAutoClickHandler;
+
+    private const int STOPCLICKS_HOTKEY_ID = 1;
     //private readonly IStatsService _statsService;
        
 
@@ -36,7 +39,9 @@ namespace AutoClick
       _stopAutoClickHandler = stopAutoClickHandler;
       _timeFrameFactory = timeFrameFactory;
       _timeIntervalHandler = timeIntervalHandler;
-      
+
+      Methods.RegisterHotKey(this.Handle, STOPCLICKS_HOTKEY_ID, (int)Modifiers.Ctrl, (int)VirtualKeyCodes.F8);
+      //Methods.UnregisterHotKey()
 
       SetupControlDataBindings();
       
@@ -47,7 +52,23 @@ namespace AutoClick
       {
         Console.WriteLine(e.PropertyName);
       };
-    }    
+    }
+
+    protected override void WndProc(ref Message m)
+    {
+      if (m.Msg == 0x0312 && m.WParam.ToInt32() == STOPCLICKS_HOTKEY_ID)
+      {
+        
+      }
+      
+      base.WndProc(ref m);
+    }
+
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+      Methods.UnregisterHotKey(this.Handle, STOPCLICKS_HOTKEY_ID);
+      base.OnFormClosing(e);
+    }
 
     private void label1_Click(object sender, EventArgs e)
     {
