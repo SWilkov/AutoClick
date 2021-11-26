@@ -7,6 +7,9 @@ using AutoClick.Services;
 using Microsoft.Extensions.DependencyInjection;
 using MouseSimulator;
 using MouseSimulator.Interfaces;
+using MediatR;
+using System.Reflection;
+using AutoClick.Notifications;
 
 namespace AutoClick.Extensions
 {
@@ -41,24 +44,25 @@ namespace AutoClick.Extensions
       {
         var dict = new Dictionary<ClickTimeFrame, ITimeService>
         {
-          {
-            ClickTimeFrame.Continous,
-            new Services.Timer.ContinousTimeService(sp.GetRequiredService<AutoClickTimer>(),
-            sp.GetRequiredService<IMouseActionService>())
-          },
+          //{
+          //  ClickTimeFrame.Continous,
+          //  new Services.Timer.ContinousTimeService(sp.GetRequiredService<AutoClickTimer>(),
+          //  sp.GetRequiredService<IMouseActionService>())
+          //},
           {
             ClickTimeFrame.Repeat,
-            new Services.Timer.RepeatTimeService(sp.GetRequiredService<AutoClickTimer>(),
-              sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
-              sp.GetRequiredService<IMouseActionService>())
-          },
-          {
-            ClickTimeFrame.TimePeriod,
-            new Services.Timer.TimePeriodTimeService(sp.GetRequiredService<AutoClickTimer>(),
+            new Services.Timer.RepeatTimeService(
               sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
               sp.GetRequiredService<IMouseActionService>(),
-              sp.GetRequiredService<IValidator<Time>>())
-          }
+              sp.GetRequiredService<ITimerPublisher>())
+          },
+          //{
+          //  ClickTimeFrame.TimePeriod,
+          //  new Services.Timer.TimePeriodTimeService(sp.GetRequiredService<AutoClickTimer>(),
+          //    sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
+          //    sp.GetRequiredService<IMouseActionService>(),
+          //    sp.GetRequiredService<IValidator<Time>>())
+          //}
         };
 
         return new Composites.TimeServiceComposite(dict);
@@ -68,6 +72,7 @@ namespace AutoClick.Extensions
 
       #region Factories
       services.AddScoped<ITimeFrameFactory, Factories.TimeFrameFactory>();
+      services.AddMediatR(Assembly.GetExecutingAssembly());
       #endregion
 
       #region Services
@@ -84,6 +89,8 @@ namespace AutoClick.Extensions
       services.AddScoped<IValidator<Setup>, Validators.SetupValidator>();
       services.AddScoped<IValidator<Time>, Validators.TimeIntervalValidator>();
       #endregion
+
+      services.AddSingleton<ITimerPublisher, TimerPublisher>();
     }
   }
 }

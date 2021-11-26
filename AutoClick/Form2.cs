@@ -3,6 +3,7 @@ using AC.Utils.Interfaces;
 using AC.Utils.Models;
 using AutoClick.Commands;
 using AutoClick.Interfaces;
+using AutoClick.Notifications;
 using System.ComponentModel;
 
 namespace AutoClick
@@ -16,38 +17,62 @@ namespace AutoClick
     private readonly ICommandHandler<StartAutoClickCommand> _startAutoClickHandler;
     private readonly ITimeFrameFactory _timeFrameFactory;
     private readonly ICommandHandler<TimerIntervalCommand> _timeIntervalHandler;
+    private readonly ITimerPublisher _timerPublisher;
     private readonly ICommandHandler<StopAutoClickCommand> _stopAutoClickHandler;
+    private readonly ITimeService _timeService;
     //private readonly IStatsService _statsService;
-       
+
 
     public formAutoClick(IValidator<Setup> validator,
       IMousePositionService mousePositionService,
       ICommandHandler<StartAutoClickCommand> starAutoClickHandler,
       ITimeFrameFactory timeFrameFactory,
       ICommandHandler<TimerIntervalCommand> timeIntervalHandler,
-      ICommandHandler<StopAutoClickCommand> stopAutoClickHandler)
+      ICommandHandler<StopAutoClickCommand> stopAutoClickHandler,
+      ITimerPublisher timerPublisher, ITimeService timeService)
     {
       InitializeComponent();
       _setup = new Setup();
-      
+
+      //this.Controls.Add(new ClickIntervalView());
+
       _validator = validator;
       _mousePositionService = mousePositionService;
       _startAutoClickHandler = starAutoClickHandler;
       _stopAutoClickHandler = stopAutoClickHandler;
       _timeFrameFactory = timeFrameFactory;
       _timeIntervalHandler = timeIntervalHandler;
-      
+      _timerPublisher = timerPublisher;
+      _timeService = timeService;
 
       SetupControlDataBindings();
-      
-      this.lblIntervalHelp.Text = "Set hours, minutes, seconds or milliseconds if both are detected milliseconds will be used.";
+
+      //this.lblIntervalHelp.Text = "Set hours, minutes, seconds or milliseconds if both are detected milliseconds will be used.";
       this.btnStop.Enabled = false;
 
       ClickStats.Instance.PropertyChanged += (s, e) =>
       {
         Console.WriteLine(e.PropertyName);
       };
-    }    
+
+      _timerPublisher.TimerEndedEvent += (s, e) =>
+      {
+        Console.WriteLine("Timer Ended Event!");
+        btnStart.Enabled = true;
+        btnStop.Enabled = false;
+      };
+      _timeService = timeService;
+    }
+
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+      if (_timerPublisher != null)
+        _timerPublisher.TimerEndedEvent -= (s, e) => { };
+      if (ClickStats.Instance != null)
+        ClickStats.Instance.PropertyChanged -= (s, e) => { };
+
+      base.OnFormClosing(e);
+    }
 
     private void label1_Click(object sender, EventArgs e)
     {
@@ -101,10 +126,10 @@ namespace AutoClick
     #region DataBinding
     private void SetupControlDataBindings()
     {
-      this.numHours.DataBindings.Add("Value", _setup.Interval, "Hours", true, DataSourceUpdateMode.OnPropertyChanged);
-      this.numMinutes.DataBindings.Add("Value", _setup.Interval, "Minutes", true, DataSourceUpdateMode.OnPropertyChanged);
-      this.numSeconds.DataBindings.Add("Value", _setup.Interval, "Seconds", true, DataSourceUpdateMode.OnPropertyChanged);
-      this.numMilliseconds.DataBindings.Add("Value", _setup.Interval, "Milliseconds", true, DataSourceUpdateMode.OnPropertyChanged);
+      //this.numHours.DataBindings.Add("Value", _setup.Interval, "Hours", true, DataSourceUpdateMode.OnPropertyChanged);
+      //this.numMinutes.DataBindings.Add("Value", _setup.Interval, "Minutes", true, DataSourceUpdateMode.OnPropertyChanged);
+      //this.numSeconds.DataBindings.Add("Value", _setup.Interval, "Seconds", true, DataSourceUpdateMode.OnPropertyChanged);
+      //this.numMilliseconds.DataBindings.Add("Value", _setup.Interval, "Milliseconds", true, DataSourceUpdateMode.OnPropertyChanged);
       this.chkCurrentLocation.DataBindings.Add("Checked", _setup, "UseCurrentLocation", true, DataSourceUpdateMode.OnPropertyChanged);
 
       this.numX.DataBindings.Add("Value", _setup.MouseLocation, "X", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -121,7 +146,7 @@ namespace AutoClick
     #region Start/Stop Events
     private void btnStart_Click(object sender, EventArgs e)
     {
-      Console.WriteLine($"{numHours.Text} Hours, {numMinutes.Text} Minutes");
+      //Console.WriteLine($"{numHours.Text} Hours, {numMinutes.Text} Minutes");
 
       var validation = _validator.Validate(_setup);
       if (validation != null && validation.Result == ValidationResult.Invalid)
@@ -131,16 +156,18 @@ namespace AutoClick
       }
 
       var timeFrame = _timeFrameFactory.Get(_setup);
-      var timeIntervalCommand = new TimerIntervalCommand(_setup);
+      var timeIntervalCommand = new TimerIntervalCommand(clickIntervalViewForRepeat.IntervalTime);
       _timeIntervalHandler.Handle(timeIntervalCommand);
 
       var mp = _mousePositionService.Get(_setup);
 
-      var config = new ClickerConfiguration(timeIntervalCommand.Interval, _setup.RepeatsFor, _setup.RunningTime, mp);
+      ClickerConfiguration.Set(timeIntervalCommand.Milliseconds, _setup.RepeatsFor, _setup.RunningTime, mp);
 
-      var startCommand = new StartAutoClickCommand(timeFrame, config);
+      //var config = new ClickerConfiguration(timeIntervalCommand.Interval, _setup.RepeatsFor, _setup.RunningTime, mp);
 
-      _startAutoClickHandler.Handle(startCommand);
+      //var startCommand = new StartAutoClickCommand(timeFrame, ClickerConfiguration);
+      //_startAutoClickHandler.Handle(startCommand);
+      _timeService.Run(timeFrame, ClickerConfiguration.Interval, ClickerConfiguration.RepeatsFor);
 
       btnStart.Enabled = false;
       btnStop.Enabled = true;
@@ -191,6 +218,8 @@ namespace AutoClick
     private void lblMilliseconds_Click(object sender, EventArgs e)
     {
 
-    }
+    } 
+    
+    
   }
 }

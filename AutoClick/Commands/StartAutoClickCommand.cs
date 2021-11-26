@@ -6,12 +6,11 @@ namespace AutoClick.Commands
 {
   public class StartAutoClickCommand : ICommand
   {
-    public ClickerConfiguration ClickerConfiguration { get; private set; }
+    //public ClickerConfiguration ClickerConfiguration { get; private set; }
     public ClickTimeFrame ClickTimeFrame { get; private set; }
-    public StartAutoClickCommand(ClickTimeFrame clickTimeFrame,
-      ClickerConfiguration clickerConfiguration)
+    public StartAutoClickCommand(ClickTimeFrame clickTimeFrame)      
     {
-      this.ClickerConfiguration = clickerConfiguration;
+      //this.ClickerConfiguration = clickerConfiguration;
       this.ClickTimeFrame = clickTimeFrame;
     }
   }

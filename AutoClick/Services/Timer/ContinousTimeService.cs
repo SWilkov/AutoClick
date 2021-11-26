@@ -24,7 +24,7 @@ namespace AutoClick.Services.Timer
       _mouseActionService = mouseActionService;
     }
 
-    public void Run(ClickTimeFrame timeFrame, ClickerConfiguration config)
+    public void Run(ClickTimeFrame timeFrame)
     {
       if (config == null) throw new ArgumentNullException(nameof(config));
       if (timeFrame != ClickTimeFrame.Continous) throw new ArgumentException($"Incorrect time frame detected: Expected Continous received {timeFrame.ToString()}");

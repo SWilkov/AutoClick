@@ -5,11 +5,11 @@ namespace AutoClick.Commands
 {
   public class TimerIntervalCommand : ICommand
   {
-    public Setup Setup { get; private set; }
-    public int Interval { get; set; } //always milliseconds
-    public TimerIntervalCommand(Setup setup)
+    public Time? Interval { get; private set; }
+    public int Milliseconds { get; set; } //always set milliseconds
+    public TimerIntervalCommand(Time? interval)
     {
-      this.Setup = setup;
+      this.Interval = Interval;
     }
   }
 }

@@ -11,9 +11,13 @@
   <ItemGroup>
     <Compile Remove="Models\TimerUtils.cs" />
     <Compile Remove="Services\StatsService.cs" />
+    <Compile Remove="Services\Timer\ContinousTimeService.cs" />
+    <Compile Remove="Services\Timer\TimePeriodTimeService.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
@@ -22,6 +26,10 @@
     <ProjectReference Include="..\AC.Framework\AC.Framework.csproj" />
     <ProjectReference Include="..\AC.Utils\AC.Utils.csproj" />
     <ProjectReference Include="..\MouseSimulator\MouseSimulator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
 
 </Project>
