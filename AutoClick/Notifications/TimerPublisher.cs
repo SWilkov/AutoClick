@@ -8,17 +8,11 @@ namespace AutoClick.Notifications
 
     public event EventHandler<TimerEventArgs> TimerStartedEvent;
     public event EventHandler<TimerEventArgs> TimerEndedEvent;
+    public event EventHandler<TimerEventArgs> TimerTickEvent;
 
-    public void TimerStarted()
-    {
-      OnTimerStarted(new TimerEventArgs());
-    }
-
-    public void TimerEnded()
-    {
-      OnTimerEnded(new TimerEventArgs());
-    }
-
+    public void TimerStarted() => OnTimerStarted(new TimerEventArgs());
+    public void TimerEnded() => OnTimerEnded(new TimerEventArgs());
+    public void TimerTick() => OnTimerTick(new TimerEventArgs());
    
     protected virtual void OnTimerStarted(TimerEventArgs e)
     {
@@ -42,6 +36,11 @@ namespace AutoClick.Notifications
       }
     }
 
-    
+    protected virtual void OnTimerTick(TimerEventArgs e)
+    {
+      var timerTickEvent = TimerTickEvent;
+      if (timerTickEvent != null)
+        timerTickEvent(this, e);
+    }
   }
 }

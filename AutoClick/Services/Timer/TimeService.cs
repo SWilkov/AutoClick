@@ -50,6 +50,8 @@ namespace AutoClick.Services.Timer
           //Left mouse button click
           _mouseActionService.LeftMouseButtonDown();
           _mouseActionService.LeftMouseButtonUp();
+
+          _timerPublisher.TimerTick();
           //_statsService.AddToClicks();
           ClickStats.Instance.Add();
           count++;

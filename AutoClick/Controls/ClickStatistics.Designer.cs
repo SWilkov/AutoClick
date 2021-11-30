@@ -42,7 +42,7 @@
       this.grpBoxStats.Controls.Add(this.lblTotalClicksName);
       this.grpBoxStats.Location = new System.Drawing.Point(77, 44);
       this.grpBoxStats.Name = "grpBoxStats";
-      this.grpBoxStats.Size = new System.Drawing.Size(869, 192);
+      this.grpBoxStats.Size = new System.Drawing.Size(921, 242);
       this.grpBoxStats.TabIndex = 23;
       this.grpBoxStats.TabStop = false;
       this.grpBoxStats.Text = "stats";

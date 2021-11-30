@@ -59,6 +59,11 @@ namespace AutoClick
       SetStopText();
 
       #region Events
+      ClickStats.Instance.PropertyChanged += (s, e) =>
+      {
+        repeaterProgress1.Step();
+      };
+
       _timerPublisher.TimerEndedEvent += (s, e) =>
       {
         Console.WriteLine("Timer Ended Event!");
@@ -81,6 +86,8 @@ namespace AutoClick
       #endregion
       _timeService = timeService;
       btnStart.Enabled = false;
+      repeaterProgress1.Maximum = ClickerConfiguration.RepeatsFor;
+      repeaterProgress1.Setup();
     }
 
     protected override void WndProc(ref Message m)
@@ -175,13 +182,9 @@ namespace AutoClick
 
     #region Start/Stop Events
     private void btnStart_Click(object sender, EventArgs e)
-    {
-      var validation = _validator.Validate(_setup);
-      if (validation != null && validation.Result == ValidationResult.Invalid)
-      {
-        Console.WriteLine($"{validation.Message}");
-        lblErrorMessage.Text = validation.Message;
-      }
+    {      
+      repeaterProgress1.Maximum = repeaterView.RepeatsFor;
+      repeaterProgress1.Setup();
 
       _setup.Repeater = new Repeater
       {
