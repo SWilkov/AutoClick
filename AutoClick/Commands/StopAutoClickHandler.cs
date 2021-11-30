@@ -23,11 +23,8 @@ namespace AutoClick.Commands
         command.Message = "Timer is null or not running!";
         return;
       }
-
-      AutoClickTimer.Instance.IntervalTimer.Stop();
-      AutoClickTimer.Instance.DisposeEvents();
+      
       command.StoppedAt = DateTime.Now;
-
       _timerPublisher.TimerEnded();
     }
   }

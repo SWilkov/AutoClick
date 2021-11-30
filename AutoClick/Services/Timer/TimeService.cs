@@ -68,6 +68,8 @@ namespace AutoClick.Services.Timer
       };
     }
 
+    public bool Enabled => _intervalTimer != null && _intervalTimer.Enabled;
+
     public void Run(ClickTimeFrame timeFrame)
     {
       if (ClickerConfiguration.RepeatsFor < default(int) && timeFrame == ClickTimeFrame.Repeat)
@@ -77,6 +79,7 @@ namespace AutoClick.Services.Timer
 
       _intervalTimer.Interval = ClickerConfiguration.Interval;
       _intervalTimer.Start();
+      _timerPublisher.TimerStarted();
     }
 
     public void Dispose()
