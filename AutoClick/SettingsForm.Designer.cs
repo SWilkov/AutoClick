@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       this.grpStopkey = new System.Windows.Forms.GroupBox();
+      this.btnBack = new System.Windows.Forms.Button();
       this.btnF2 = new System.Windows.Forms.Button();
       this.btnF3 = new System.Windows.Forms.Button();
       this.btnF4 = new System.Windows.Forms.Button();
@@ -39,12 +40,12 @@
       this.btnF10 = new System.Windows.Forms.Button();
       this.btnF9 = new System.Windows.Forms.Button();
       this.btnF1 = new System.Windows.Forms.Button();
-      this.btnBack = new System.Windows.Forms.Button();
       this.grpStopkey.SuspendLayout();
       this.SuspendLayout();
       // 
       // grpStopkey
       // 
+      this.grpStopkey.Controls.Add(this.btnBack);
       this.grpStopkey.Controls.Add(this.btnF2);
       this.grpStopkey.Controls.Add(this.btnF3);
       this.grpStopkey.Controls.Add(this.btnF4);
@@ -55,12 +56,23 @@
       this.grpStopkey.Controls.Add(this.btnF10);
       this.grpStopkey.Controls.Add(this.btnF9);
       this.grpStopkey.Controls.Add(this.btnF1);
-      this.grpStopkey.Location = new System.Drawing.Point(64, 125);
+      this.grpStopkey.Location = new System.Drawing.Point(53, 42);
       this.grpStopkey.Name = "grpStopkey";
       this.grpStopkey.Size = new System.Drawing.Size(997, 368);
       this.grpStopkey.TabIndex = 0;
       this.grpStopkey.TabStop = false;
       this.grpStopkey.Text = "Hotkey to Stop Clicker";
+      // 
+      // btnBack
+      // 
+      this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.btnBack.Location = new System.Drawing.Point(748, 271);
+      this.btnBack.Name = "btnBack";
+      this.btnBack.Size = new System.Drawing.Size(188, 58);
+      this.btnBack.TabIndex = 1;
+      this.btnBack.Text = "< Back";
+      this.btnBack.UseVisualStyleBackColor = true;
+      this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
       // 
       // btnF2
       // 
@@ -163,22 +175,11 @@
       this.btnF1.UseVisualStyleBackColor = true;
       this.btnF1.Click += new System.EventHandler(this.btnF1_Click);
       // 
-      // btnBack
-      // 
-      this.btnBack.Location = new System.Drawing.Point(76, 31);
-      this.btnBack.Name = "btnBack";
-      this.btnBack.Size = new System.Drawing.Size(188, 58);
-      this.btnBack.TabIndex = 1;
-      this.btnBack.Text = "<- Back";
-      this.btnBack.UseVisualStyleBackColor = true;
-      this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-      // 
       // SettingsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1136, 803);
-      this.Controls.Add(this.btnBack);
+      this.ClientSize = new System.Drawing.Size(1136, 459);
       this.Controls.Add(this.grpStopkey);
       this.Name = "SettingsForm";
       this.Text = "SettingsForm";

@@ -1,4 +1,6 @@
 ﻿using AC.Framework.Models;
+using AutoClick.Notifications;
+using System.ComponentModel;
 
 namespace AutoClick
 {
@@ -10,7 +12,22 @@ namespace AutoClick
       get { return _userSettings; }
     }
 
+    [Browsable(true)]
+    [Category("Action")]
+    [Description("Hot key possibly changed")]
+    public event EventHandler<SettingsSavedEventArgs> SettingsSavedEvent;
 
+    protected void OnSettingsSaved(object sender, SettingsSavedEventArgs e)
+    {
+      var settingsSavedEvent = SettingsSavedEvent;
+      if (settingsSavedEvent != null)
+        settingsSavedEvent(this, e);
+    }
+
+    private void SettingsSaved(int saveKey)
+    {
+      OnSettingsSaved(this, new SettingsSavedEventArgs(saveKey));
+    }
 
     public SettingsForm()
     {
@@ -30,6 +47,9 @@ namespace AutoClick
       this._userSettings.StopHotKey = key;
       SetStyleDefaults();
       SetStyleSelected(key);
+
+      //Raise event
+      SettingsSaved(key);
     }
 
     private void btnF1_Click(object sender, EventArgs e) => Set((int)Keys.F1);
@@ -134,7 +154,7 @@ namespace AutoClick
           btnF10.ForeColor = SystemColors.HighlightText;
           break;
       }
-    }
+    }    
 
     private void btnBack_Click(object sender, EventArgs e)
     {
