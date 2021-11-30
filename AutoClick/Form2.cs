@@ -25,7 +25,7 @@ namespace AutoClick
     private readonly IHotKeyService _hotKeyService;
     private const int STOPCLICKS_HOTKEY_ID = 1;
     //private readonly IStatsService _statsService;
-
+    private SettingsForm _settingsForm;
 
     public formAutoClick(IValidator<Setup> validator,
       IMousePositionService mousePositionService,
@@ -56,7 +56,7 @@ namespace AutoClick
       SetupControlDataBindings();
 
       this.btnStop.Enabled = false;
-      this.btnStop.Text = $"Stop (Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
+      SetStopText();
 
       #region Events
       _timerPublisher.TimerEndedEvent += (s, e) =>
@@ -72,7 +72,11 @@ namespace AutoClick
         this.btnStart.Enabled = e.Result == ValidationResult.Valid;
       };
 
-
+      _settingsForm = new SettingsForm();
+      _settingsForm.SettingsSavedEvent += (s, e) =>
+      {
+        SetStopText();
+      };
 
       #endregion
       _timeService = timeService;
@@ -94,11 +98,20 @@ namespace AutoClick
     {
       if (_timerPublisher != null)
         _timerPublisher.TimerEndedEvent -= (s, e) => { };
+      if (_settingsForm != null)
+        _settingsForm.SettingsSavedEvent -= (s, e) => { };
+      if (clickIntervalViewForRepeat != null)
+        clickIntervalViewForRepeat.IntervalChangedEvent -= (s, e) => { };
      
       _hotKeyService.UnregisterHotKeyWrapper(this.Handle, STOPCLICKS_HOTKEY_ID);
       base.OnFormClosing(e);
     }
-         
+
+    private void SetStopText()
+    {
+      this.btnStop.Text = $"Stop (Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
+    }
+
 
     private void numY_ValueChanged(object sender, EventArgs e)
     {
@@ -219,8 +232,10 @@ namespace AutoClick
 
     private void btnHotKey_Click(object sender, EventArgs e)
     {
-      var settingsform = new SettingsForm();
-      settingsform.Show();
+      if (_settingsForm == null)
+        _settingsForm = new SettingsForm();
+     
+      _settingsForm.Show();
 
       FormState.PreviousPage = this;
       this.Hide();

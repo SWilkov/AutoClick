@@ -1,4 +1,5 @@
 ﻿using AC.Utils.Interfaces;
+using AutoClick.Interfaces;
 using AutoClick.Models;
 using AutoClick.Notifications;
 

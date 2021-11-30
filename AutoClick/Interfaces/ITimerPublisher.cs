@@ -1,5 +1,7 @@
 ﻿
-namespace AutoClick.Notifications
+using AutoClick.Notifications;
+
+namespace AutoClick.Interfaces
 {
   public interface ITimerPublisher
   {

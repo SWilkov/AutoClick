@@ -1,23 +1,8 @@
 ﻿using AC.Utils.Models;
+using AutoClick.Interfaces;
 
 namespace AutoClick.Notifications
 {
-  public class TimerEventArgs : EventArgs
-  {
-    public TimerEventArgs()
-    {
-
-    }
-  }
-  public class IntervalChangedEventArgs : EventArgs
-  {
-    public ValidationResult Result { get; private set; }
-    public IntervalChangedEventArgs(ValidationResult result)
-    {
-      this.Result = result;
-    }
-  }
-
   public class TimerPublisher : ITimerPublisher
   {
 
