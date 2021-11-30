@@ -5,6 +5,7 @@ using AutoClick.Commands;
 using AutoClick.Interfaces;
 using AutoClick.Notifications;
 using System.ComponentModel;
+using KeyboardSimulator.Native;
 
 namespace AutoClick
 {
@@ -20,6 +21,9 @@ namespace AutoClick
     private readonly ITimerPublisher _timerPublisher;
     private readonly ICommandHandler<StopAutoClickCommand> _stopAutoClickHandler;
     private readonly ITimeService _timeService;
+    private readonly IUserSettingsService _userSettingsService;
+    private readonly IHotKeyService _hotKeyService;
+    private const int STOPCLICKS_HOTKEY_ID = 1;
     //private readonly IStatsService _statsService;
 
 
@@ -29,13 +33,13 @@ namespace AutoClick
       ITimeFrameFactory timeFrameFactory,
       ICommandHandler<TimerIntervalCommand> timeIntervalHandler,
       ICommandHandler<StopAutoClickCommand> stopAutoClickHandler,
-      ITimerPublisher timerPublisher, ITimeService timeService)
+      ITimerPublisher timerPublisher, ITimeService timeService,
+      IUserSettingsService userSettingsService,
+      IHotKeyService hotKeyService)
     {
       InitializeComponent();
       _setup = new Setup();
-
-      //this.Controls.Add(new ClickIntervalView());
-
+      
       _validator = validator;
       _mousePositionService = mousePositionService;
       _startAutoClickHandler = starAutoClickHandler;
@@ -44,11 +48,15 @@ namespace AutoClick
       _timeIntervalHandler = timeIntervalHandler;
       _timerPublisher = timerPublisher;
       _timeService = timeService;
+      _userSettingsService = userSettingsService;
+      _hotKeyService = hotKeyService;
 
+      _hotKeyService.RegisterHotKeyWrapper(this.Handle, STOPCLICKS_HOTKEY_ID, (int)Modifiers.Ctrl, (int)VirtualKeyCodes.F8);
+ 
       SetupControlDataBindings();
 
-      //this.lblIntervalHelp.Text = "Set hours, minutes, seconds or milliseconds if both are detected milliseconds will be used.";
       this.btnStop.Enabled = false;
+      this.btnStop.Text = $"Stop (Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
 
       ClickStats.Instance.PropertyChanged += (s, e) =>
       {
@@ -64,6 +72,17 @@ namespace AutoClick
       _timeService = timeService;
     }
 
+    protected override void WndProc(ref Message m)
+    {
+      if (m.Msg == (int)Specials.WM_HOTKEY && m.WParam.ToInt32() == STOPCLICKS_HOTKEY_ID)
+      {
+        //Stop the autoclicker
+        _stopAutoClickHandler.Handle(new StopAutoClickCommand());
+      }
+      
+      base.WndProc(ref m);
+    }
+
     protected override void OnFormClosing(FormClosingEventArgs e)
     {
       if (_timerPublisher != null)
@@ -71,13 +90,10 @@ namespace AutoClick
       if (ClickStats.Instance != null)
         ClickStats.Instance.PropertyChanged -= (s, e) => { };
 
+      _hotKeyService.UnregisterHotKeyWrapper(this.Handle, STOPCLICKS_HOTKEY_ID);
       base.OnFormClosing(e);
     }
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }    
+         
 
     private void numY_ValueChanged(object sender, EventArgs e)
     {
@@ -126,16 +142,12 @@ namespace AutoClick
     #region DataBinding
     private void SetupControlDataBindings()
     {
-      //this.numHours.DataBindings.Add("Value", _setup.Interval, "Hours", true, DataSourceUpdateMode.OnPropertyChanged);
-      //this.numMinutes.DataBindings.Add("Value", _setup.Interval, "Minutes", true, DataSourceUpdateMode.OnPropertyChanged);
-      //this.numSeconds.DataBindings.Add("Value", _setup.Interval, "Seconds", true, DataSourceUpdateMode.OnPropertyChanged);
-      //this.numMilliseconds.DataBindings.Add("Value", _setup.Interval, "Milliseconds", true, DataSourceUpdateMode.OnPropertyChanged);
       this.chkCurrentLocation.DataBindings.Add("Checked", _setup, "UseCurrentLocation", true, DataSourceUpdateMode.OnPropertyChanged);
 
       this.numX.DataBindings.Add("Value", _setup.MouseLocation, "X", true, DataSourceUpdateMode.OnPropertyChanged);
       this.numY.DataBindings.Add("Value", _setup.MouseLocation, "Y", true, DataSourceUpdateMode.OnPropertyChanged);
 
-      this.numRepeats.DataBindings.Add("Value", _setup, "RepeatsFor", true, DataSourceUpdateMode.OnPropertyChanged);
+      //this.numRepeats.DataBindings.Add("Value", _setup, "RepeatsFor", true, DataSourceUpdateMode.OnPropertyChanged);
            
       lblTotalClicks.DataBindings.Add("Text", ClickStats.Instance, "Total", true, DataSourceUpdateMode.OnPropertyChanged);
     }
@@ -146,8 +158,6 @@ namespace AutoClick
     #region Start/Stop Events
     private void btnStart_Click(object sender, EventArgs e)
     {
-      //Console.WriteLine($"{numHours.Text} Hours, {numMinutes.Text} Minutes");
-
       var validation = _validator.Validate(_setup);
       if (validation != null && validation.Result == ValidationResult.Invalid)
       {
@@ -155,19 +165,16 @@ namespace AutoClick
         lblErrorMessage.Text = validation.Message;
       }
 
-      var timeFrame = _timeFrameFactory.Get(_setup);
+      _setup.Repeater = repeaterView1.Repeater;
+
+      var timeFrame = _timeFrameFactory.Get(repeaterView1.Repeater);
       var timeIntervalCommand = new TimerIntervalCommand(clickIntervalViewForRepeat.IntervalTime);
       _timeIntervalHandler.Handle(timeIntervalCommand);
 
-      var mp = _mousePositionService.Get(_setup);
-
-      ClickerConfiguration.Set(timeIntervalCommand.Milliseconds, _setup.RepeatsFor, _setup.RunningTime, mp);
-
-      //var config = new ClickerConfiguration(timeIntervalCommand.Interval, _setup.RepeatsFor, _setup.RunningTime, mp);
-
-      //var startCommand = new StartAutoClickCommand(timeFrame, ClickerConfiguration);
-      //_startAutoClickHandler.Handle(startCommand);
-      _timeService.Run(timeFrame, ClickerConfiguration.Interval, ClickerConfiguration.RepeatsFor);
+      var mp = _mousePositionService.Get(_setup);      
+      ClickerConfiguration.Set(timeIntervalCommand.Milliseconds, _setup.Repeater.RepeatsFor, _setup.RunningTime, mp);
+           
+      _timeService.Run(timeFrame);
 
       btnStart.Enabled = false;
       btnStop.Enabled = true;
@@ -194,32 +201,20 @@ namespace AutoClick
 
     #endregion
 
-    private void Form2_KeyPress(object sender, KeyPressEventArgs e)
-    {
-      
-    }
 
-    private void Form2_KeyDown(object sender, KeyEventArgs e)
-    {
-      //TODO this only works when the form is in focus. Need to add a keyboard hook to activate at anytime
-      if (e.KeyCode == Keys.F10)
-      {
-        var stopCommand = new StopAutoClickCommand();
-        _stopAutoClickHandler.Handle(stopCommand);
-        
-      }
-    }
 
     private void btnResetStats_Click(object sender, EventArgs e)
     {
       ClickStats.Instance.Reset(); 
-    }
+    }    
 
-    private void lblMilliseconds_Click(object sender, EventArgs e)
+    private void btnHotKey_Click(object sender, EventArgs e)
     {
+      var settingsform = new SettingsForm();
+      settingsform.Show();
 
-    } 
-    
-    
+      FormState.PreviousPage = this;
+      this.Hide();
+    }
   }
 }

@@ -77,6 +77,7 @@ namespace AutoClick.Extensions
 
       #region Services
       services.AddSingleton<IMouseActionService, MouseActionService>();
+      services.AddScoped<IUserSettingsService, UserSettingsService>();
       //services.AddSingleton<IStatsService, StatsService>();
       #endregion
 

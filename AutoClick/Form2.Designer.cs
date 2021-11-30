@@ -29,7 +29,8 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      AC.Framework.Models.Time time1 = new AC.Framework.Models.Time();
+      AC.Framework.Models.Time time2 = new AC.Framework.Models.Time();
+      AC.Framework.Models.Repeater repeater2 = new AC.Framework.Models.Repeater();
       this.btnStart = new System.Windows.Forms.Button();
       this.btnStop = new System.Windows.Forms.Button();
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -40,19 +41,17 @@
       this.chkCurrentLocation = new System.Windows.Forms.CheckBox();
       this.grpBoxActions = new System.Windows.Forms.GroupBox();
       this.lblErrorMessage = new System.Windows.Forms.Label();
-      this.grpBoxRepeat = new System.Windows.Forms.GroupBox();
-      this.numRepeats = new System.Windows.Forms.NumericUpDown();
       this.grpBoxStats = new System.Windows.Forms.GroupBox();
       this.btnResetStats = new System.Windows.Forms.Button();
       this.lblTotalClicks = new System.Windows.Forms.Label();
       this.lblTotalClicksName = new System.Windows.Forms.Label();
       this.grpBoxLocation = new System.Windows.Forms.GroupBox();
-      this.clickIntervalViewForRepeat = new AutoClick.ClickIntervalView();
+      this.clickIntervalViewForRepeat = new AutoClick.Controls.ClickIntervalView();
+      this.btnHotKey = new System.Windows.Forms.Button();
+      this.repeaterView1 = new AutoClick.Controls.RepeaterView();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
-      this.grpBoxRepeat.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numRepeats)).BeginInit();
       this.grpBoxStats.SuspendLayout();
       this.grpBoxLocation.SuspendLayout();
       this.SuspendLayout();
@@ -75,11 +74,11 @@
       this.btnStop.BackColor = System.Drawing.Color.DarkGray;
       this.btnStop.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.btnStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.btnStop.Location = new System.Drawing.Point(581, 78);
+      this.btnStop.Location = new System.Drawing.Point(581, 51);
       this.btnStop.Name = "btnStop";
-      this.btnStop.Size = new System.Drawing.Size(250, 120);
+      this.btnStop.Size = new System.Drawing.Size(250, 150);
       this.btnStop.TabIndex = 5;
-      this.btnStop.Text = "Stop";
+      this.btnStop.Text = "Stop   Ctrl + F12";
       this.btnStop.UseVisualStyleBackColor = false;
       this.btnStop.EnabledChanged += new System.EventHandler(this.btnStop_EnabledChanged);
       this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
@@ -159,28 +158,6 @@
       this.lblErrorMessage.Size = new System.Drawing.Size(0, 41);
       this.lblErrorMessage.TabIndex = 16;
       // 
-      // grpBoxRepeat
-      // 
-      this.grpBoxRepeat.Controls.Add(this.numRepeats);
-      this.grpBoxRepeat.Location = new System.Drawing.Point(38, 372);
-      this.grpBoxRepeat.Name = "grpBoxRepeat";
-      this.grpBoxRepeat.Size = new System.Drawing.Size(500, 227);
-      this.grpBoxRepeat.TabIndex = 17;
-      this.grpBoxRepeat.TabStop = false;
-      this.grpBoxRepeat.Text = "Repeats";
-      // 
-      // numRepeats
-      // 
-      this.numRepeats.Location = new System.Drawing.Point(64, 118);
-      this.numRepeats.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-      this.numRepeats.Name = "numRepeats";
-      this.numRepeats.Size = new System.Drawing.Size(250, 47);
-      this.numRepeats.TabIndex = 0;
-      // 
       // grpBoxStats
       // 
       this.grpBoxStats.Controls.Add(this.btnResetStats);
@@ -238,37 +215,70 @@
       // 
       // clickIntervalViewForRepeat
       // 
-      time1.Hours = 0D;
-      time1.Milliseconds = 0;
-      time1.Minutes = 0D;
-      time1.Seconds = 0D;
-      this.clickIntervalViewForRepeat.IntervalTime = time1;
+      time2.Hours = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      time2.Milliseconds = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      time2.Minutes = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      time2.Seconds = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.clickIntervalViewForRepeat.IntervalTime = time2;
       this.clickIntervalViewForRepeat.Location = new System.Drawing.Point(12, -4);
       this.clickIntervalViewForRepeat.Name = "clickIntervalViewForRepeat";
       this.clickIntervalViewForRepeat.Size = new System.Drawing.Size(1226, 389);
       this.clickIntervalViewForRepeat.TabIndex = 24;
+      // 
+      // btnHotKey
+      // 
+      this.btnHotKey.Location = new System.Drawing.Point(1054, 851);
+      this.btnHotKey.Name = "btnHotKey";
+      this.btnHotKey.Size = new System.Drawing.Size(217, 88);
+      this.btnHotKey.TabIndex = 24;
+      this.btnHotKey.Text = "Set Stop Key";
+      this.btnHotKey.UseVisualStyleBackColor = true;
+      this.btnHotKey.Click += new System.EventHandler(this.btnHotKey_Click);
+      // 
+      // repeaterView1
+      // 
+      this.repeaterView1.Location = new System.Drawing.Point(12, 372);
+      this.repeaterView1.Name = "repeaterView1";
+      repeater2.Repeats = true;
+      repeater2.RepeatsFor = 100;
+      this.repeaterView1.Repeater = repeater2;
+      this.repeaterView1.Size = new System.Drawing.Size(630, 250);
+      this.repeaterView1.TabIndex = 25;
       // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1308, 1190);
+      this.Controls.Add(this.repeaterView1);
       this.Controls.Add(this.clickIntervalViewForRepeat);
+      this.Controls.Add(this.btnHotKey);
       this.Controls.Add(this.grpBoxLocation);
       this.Controls.Add(this.grpBoxStats);
-      this.Controls.Add(this.grpBoxRepeat);
       this.Controls.Add(this.lblErrorMessage);
       this.Controls.Add(this.grpBoxActions);
       this.KeyPreview = true;
       this.Name = "formAutoClick";
       this.Text = "Auto Clicker";
-      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
-      this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form2_KeyPress);
       ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
       this.grpBoxActions.ResumeLayout(false);
-      this.grpBoxRepeat.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.numRepeats)).EndInit();
       this.grpBoxStats.ResumeLayout(false);
       this.grpBoxStats.PerformLayout();
       this.grpBoxLocation.ResumeLayout(false);
@@ -294,13 +304,13 @@
     private NumericUpDown numX;
     private CheckBox chkCurrentLocation;
     private Label lblErrorMessage;
-    private GroupBox grpBoxRepeat;
-    private NumericUpDown numRepeats;
     private GroupBox grpBoxStats;
     private Button btnResetStats;
     private Label lblTotalClicks;
     private Label lblTotalClicksName;
     private GroupBox grpBoxLocation;
-    private ClickIntervalView clickIntervalViewForRepeat;
+    private Controls.ClickIntervalView clickIntervalViewForRepeat;
+    private Button btnHotKey;
+    private Controls.RepeaterView repeaterView1;
   }
 }

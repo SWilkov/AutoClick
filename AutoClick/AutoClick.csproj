@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
@@ -11,7 +10,6 @@
   <ItemGroup>
     <Compile Remove="Models\TimerUtils.cs" />
     <Compile Remove="Services\StatsService.cs" />
-    <Compile Remove="Services\Timer\ContinousTimeService.cs" />
     <Compile Remove="Services\Timer\TimePeriodTimeService.cs" />
   </ItemGroup>
 
@@ -25,11 +23,23 @@
   <ItemGroup>
     <ProjectReference Include="..\AC.Framework\AC.Framework.csproj" />
     <ProjectReference Include="..\AC.Utils\AC.Utils.csproj" />
+    <ProjectReference Include="..\KeyboardSimulator\KeyboardSimulator.csproj" />
     <ProjectReference Include="..\MouseSimulator\MouseSimulator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
