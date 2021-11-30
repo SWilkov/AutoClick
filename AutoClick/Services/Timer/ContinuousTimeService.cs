@@ -43,6 +43,8 @@ namespace AutoClick.Services.Timer
       };
     }
 
+    public bool Enabled => _timer != null && _timer.Enabled;
+
     public void Run(ClickTimeFrame timeFrame)
     {
       if (timeFrame != ClickTimeFrame.Continuous) throw new ArgumentException($"Incorrect time frame detected: Expected Continous received {timeFrame.ToString()}");

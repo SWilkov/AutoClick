@@ -46,6 +46,7 @@
       this.repeaterView = new AutoClick.Controls.RepeaterView();
       this.clickStatistics1 = new AutoClick.Controls.ClickStatistics();
       this.repeaterProgress1 = new AutoClick.Controls.RepeaterProgress();
+      this.btnReset = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -222,7 +223,7 @@
       // 
       // clickStatistics1
       // 
-      this.clickStatistics1.Location = new System.Drawing.Point(124, 972);
+      this.clickStatistics1.Location = new System.Drawing.Point(160, 987);
       this.clickStatistics1.Name = "clickStatistics1";
       this.clickStatistics1.Size = new System.Drawing.Size(1000, 247);
       this.clickStatistics1.TabIndex = 26;
@@ -235,11 +236,22 @@
       this.repeaterProgress1.Size = new System.Drawing.Size(733, 181);
       this.repeaterProgress1.TabIndex = 27;
       // 
+      // btnReset
+      // 
+      this.btnReset.Location = new System.Drawing.Point(972, 1095);
+      this.btnReset.Name = "btnReset";
+      this.btnReset.Size = new System.Drawing.Size(188, 58);
+      this.btnReset.TabIndex = 28;
+      this.btnReset.Text = "Reset";
+      this.btnReset.UseVisualStyleBackColor = true;
+      this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1308, 1498);
+      this.Controls.Add(this.btnReset);
       this.Controls.Add(this.repeaterProgress1);
       this.Controls.Add(this.clickStatistics1);
       this.Controls.Add(this.repeaterView);
@@ -282,5 +294,6 @@
     private Controls.RepeaterView repeaterView;
     private Controls.ClickStatistics clickStatistics1;
     private Controls.RepeaterProgress repeaterProgress1;
+    private Button btnReset;
   }
 }

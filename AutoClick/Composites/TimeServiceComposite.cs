@@ -15,5 +15,8 @@ namespace AutoClick.Composites
 
     public void Run(ClickTimeFrame timeFrame) =>
       _services[timeFrame].Run(timeFrame);
+
+    public bool Enabled =>
+      _services.Values.Any(x => x.Enabled);
   }
 }

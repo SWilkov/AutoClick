@@ -15,7 +15,7 @@ namespace AutoClick.Controls
   public partial class ClickStatistics : UserControl
   {
     private readonly IClickStatsService _clickStatsService;
-
+      
     public ClickStatistics()
     {
       InitializeComponent();
@@ -32,11 +32,6 @@ namespace AutoClick.Controls
     private void SetDataBindings()
     {
       lblTotalClicks.DataBindings.Add("Text", ClickStats.Instance, "Total", true, DataSourceUpdateMode.OnPropertyChanged);
-    }
-
-    private void btnResetStats_Click(object sender, EventArgs e)
-    {
-      ClickStats.Instance.Reset();
-    }
+    }    
   }
 }

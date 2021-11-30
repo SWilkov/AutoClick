@@ -29,7 +29,6 @@
     private void InitializeComponent()
     {
       this.grpBoxStats = new System.Windows.Forms.GroupBox();
-      this.btnResetStats = new System.Windows.Forms.Button();
       this.lblTotalClicks = new System.Windows.Forms.Label();
       this.lblTotalClicksName = new System.Windows.Forms.Label();
       this.grpBoxStats.SuspendLayout();
@@ -37,25 +36,14 @@
       // 
       // grpBoxStats
       // 
-      this.grpBoxStats.Controls.Add(this.btnResetStats);
       this.grpBoxStats.Controls.Add(this.lblTotalClicks);
       this.grpBoxStats.Controls.Add(this.lblTotalClicksName);
       this.grpBoxStats.Location = new System.Drawing.Point(77, 44);
       this.grpBoxStats.Name = "grpBoxStats";
-      this.grpBoxStats.Size = new System.Drawing.Size(921, 242);
+      this.grpBoxStats.Size = new System.Drawing.Size(701, 177);
       this.grpBoxStats.TabIndex = 23;
       this.grpBoxStats.TabStop = false;
       this.grpBoxStats.Text = "stats";
-      // 
-      // btnResetStats
-      // 
-      this.btnResetStats.Location = new System.Drawing.Point(556, 81);
-      this.btnResetStats.Name = "btnResetStats";
-      this.btnResetStats.Size = new System.Drawing.Size(188, 58);
-      this.btnResetStats.TabIndex = 2;
-      this.btnResetStats.Text = "Reset";
-      this.btnResetStats.UseVisualStyleBackColor = true;
-      this.btnResetStats.Click += new System.EventHandler(this.btnResetStats_Click);
       // 
       // lblTotalClicks
       // 
@@ -82,7 +70,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.grpBoxStats);
       this.Name = "ClickStatistics";
-      this.Size = new System.Drawing.Size(1048, 314);
+      this.Size = new System.Drawing.Size(839, 257);
       this.grpBoxStats.ResumeLayout(false);
       this.grpBoxStats.PerformLayout();
       this.ResumeLayout(false);
@@ -92,7 +80,6 @@
     #endregion
 
     private GroupBox grpBoxStats;
-    private Button btnResetStats;
     private Label lblTotalClicks;
     private Label lblTotalClicksName;
   }
