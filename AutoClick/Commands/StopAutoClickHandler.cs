@@ -1,33 +1,33 @@
 ﻿using AC.Utils.Interfaces;
 using AutoClick.Models;
+using AutoClick.Notifications;
 
 namespace AutoClick.Commands
 {
   public class StopAutoClickHandler : ICommandHandler<StopAutoClickCommand>
   {
-    private readonly AutoClickTimer _timer;
-    public StopAutoClickHandler(AutoClickTimer timer)
+    private readonly ITimerPublisher _timerPublisher;
+
+    public StopAutoClickHandler(ITimerPublisher timerPublisher)
     {
-      _timer = timer;
+      _timerPublisher = timerPublisher;
     }
 
     public void Handle(StopAutoClickCommand command)
     {
       if (command == null) throw new ArgumentNullException(nameof(command));
 
-      if (_timer == null || _timer.IntervalTimer == null || !_timer.IntervalTimer.Enabled)
+      if (AutoClickTimer.Instance == null || AutoClickTimer.Instance.IntervalTimer == null || AutoClickTimer.Instance.IntervalTimer.Enabled)
       {
         command.Message = "Timer is null or not running!";
         return;
       }
 
-      _timer.IntervalTimer.Stop();
+      AutoClickTimer.Instance.IntervalTimer.Stop();
+      AutoClickTimer.Instance.DisposeEvents();
       command.StoppedAt = DateTime.Now;
 
-      if (_timer.TimePeriodTimer != null && _timer.TimePeriodTimer.Enabled)
-      {
-        _timer.TimePeriodTimer.Stop();
-      }
+      _timerPublisher.TimerEnded();
     }
   }
 }

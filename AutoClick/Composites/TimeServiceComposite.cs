@@ -13,7 +13,7 @@ namespace AutoClick.Composites
       _services = services;
     }
 
-    public void Run(ClickTimeFrame timeFrame, ClickerConfiguration config) =>
-      _services[timeFrame].Run(timeFrame, config);
+    public void Run(ClickTimeFrame timeFrame) =>
+      _services[timeFrame].Run(timeFrame);
   }
 }

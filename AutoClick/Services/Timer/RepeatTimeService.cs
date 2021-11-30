@@ -9,46 +9,52 @@ namespace AutoClick.Services.Timer
 {
   public class RepeatTimeService : ITimeService
   {
-    private readonly AutoClickTimer _timer;
     private readonly ICommandHandler<TimerIntervalCommand> _intervalHandler;
+    private readonly ICommandHandler<StopAutoClickCommand> _stopAutoClickHandler;
     private readonly IMouseActionService _mouseActionService;
-    //private readonly IStatsService _statsService;
 
-    public RepeatTimeService(AutoClickTimer timer,
+    private int count = 0;
+
+
+    public RepeatTimeService(
       ICommandHandler<TimerIntervalCommand> intervalHandler,
+      ICommandHandler<StopAutoClickCommand> stopAutoClickHandler,
       IMouseActionService mouseActionService)
     {
-      _timer = timer;
       _intervalHandler = intervalHandler;
+      _stopAutoClickHandler = stopAutoClickHandler;
       _mouseActionService = mouseActionService;
+
+      AutoClickTimer.Instance.IntervalTimer.Tick += (sender, args) =>
+      {
+        if (count >= ClickerConfiguration.RepeatsFor)
+        {
+          _stopAutoClickHandler.Handle(new StopAutoClickCommand());
+          count = 0;
+        }
+        else
+        {
+          //Left mouse button click
+          _mouseActionService.LeftMouseButtonDown();
+          _mouseActionService.LeftMouseButtonUp();
+          ClickStats.Instance.Add();
+          count++;
+        }
+      };
     }
 
-    public void Run(ClickTimeFrame timeFrame, ClickerConfiguration config)
+    public void Run(ClickTimeFrame timeFrame)
     {
-      if (config == null) throw new ArgumentNullException(nameof(config));
       if (timeFrame != ClickTimeFrame.Repeat) throw new ArgumentException($"Incorrect time frame detected: Expected Continous received {timeFrame.ToString()}");
+      if (ClickerConfiguration.RepeatsFor < default(int)) throw new ArgumentException($"Setup indicates incorrect setup");
 
-      if (config.RepeatsFor < default(int)) throw new ArgumentException($"Setup indicates incorrect setup");
-      if (_timer.IntervalTimer.Enabled)
-        _timer.IntervalTimer.Stop();
+      if (AutoClickTimer.Instance.IntervalTimer.Enabled)
+        _stopAutoClickHandler.Handle(new StopAutoClickCommand());
 
-      _timer.IntervalTimer.Interval = config.Interval;
-      int count = 0;
-      _timer.IntervalTimer.Tick += (sender, args) =>
-      { 
-
-        if (count == config.RepeatsFor)
-          _timer.IntervalTimer.Stop();
-
-        //Left mouse button click
-        _mouseActionService.LeftMouseButtonDown();
-        _mouseActionService.LeftMouseButtonUp();
-        //_statsService.AddToClicks();
-        ClickStats.Instance.Add();
-        count++;
-      };
-
-      _timer.IntervalTimer.Start();
+      AutoClickTimer.Instance.IntervalTimer.Interval = ClickerConfiguration.Interval;
+      AutoClickTimer.Instance.IntervalTimer.Start();
     }
   }
+
+  
 }

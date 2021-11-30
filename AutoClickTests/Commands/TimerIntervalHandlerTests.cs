@@ -30,57 +30,46 @@ namespace AutoClickTests.Commands
     [Fact]
     public void setup_contains_milliseconds_set_interval()
     {
-      var cmd = new TimerIntervalCommand(new Setup
-      {
-        Interval = new Time
+      var cmd = new TimerIntervalCommand(new Time
         {
           Milliseconds = 3000
-        },
-        RepeatsFor = 100
-      });
+        });
 
       _handler.Handle(cmd);
-      Assert.Equal(3000, cmd.Interval);
+      Assert.Equal(3000, cmd.Milliseconds);
     }
 
     [Fact]
     public void ten_minutes_returns_correct_milliseconds()
     {
-      var setup = new Setup
+
+      var interval = new Time
       {
-        Interval = new Time
-        {
-          Milliseconds = 0,
-          Hours = 0,
-          Minutes = 1,
-          Seconds = 0
-        },
-        RepeatsFor = 100
+        Milliseconds = 0,
+        Hours = 0,
+        Minutes = 1,
+        Seconds = 0
       };
-      var cmd = new TimerIntervalCommand(setup);
+      var cmd = new TimerIntervalCommand(interval);
       _handler.Handle(cmd);
 
-      Assert.Equal(60000, cmd.Interval);
+      Assert.Equal(60000, cmd.Milliseconds);
     }
 
     [Fact]
     public void one_hour_ten_minutes_thirty_seconds_returns_correct_milliseconds()
     {
-      var setup = new Setup
+      var interval = new Time
       {
-        Interval = new Time
-        {
-          Milliseconds = 0,
-          Hours = 0, 
-          Minutes = 10,
-          Seconds = 30
-        },
-        RepeatsFor = 100
+        Milliseconds = 0,
+        Hours = 0,
+        Minutes = 10,
+        Seconds = 30
       };
-      var cmd = new TimerIntervalCommand(setup);
+      var cmd = new TimerIntervalCommand(interval);
       _handler.Handle(cmd);
 
-      Assert.Equal(630000, cmd.Interval);
+      Assert.Equal(630000, cmd.Milliseconds);
     }
   }
 }

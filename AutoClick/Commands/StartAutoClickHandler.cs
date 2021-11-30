@@ -1,5 +1,6 @@
 ﻿using AC.Utils.Interfaces;
 using AutoClick.Interfaces;
+using AutoClick.Models;
 using MouseSimulator.Interfaces;
 
 namespace AutoClick.Commands
@@ -19,9 +20,11 @@ namespace AutoClick.Commands
     public void Handle(StartAutoClickCommand command)
     {
       if (command == null) throw new ArgumentNullException(nameof(command));
-      if (command.ClickerConfiguration == null) throw new ArgumentNullException(nameof(command.ClickerConfiguration));    
 
-      _timeService.Run(command.ClickTimeFrame, command.ClickerConfiguration);
+      _timeService.Run(command.ClickTimeFrame);
+
+      //Start the timer!
+      AutoClickTimer.Instance.IntervalTimer.Start();
     }
   }
 }

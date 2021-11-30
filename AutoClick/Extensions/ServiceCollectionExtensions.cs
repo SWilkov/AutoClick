@@ -7,6 +7,10 @@ using AutoClick.Services;
 using Microsoft.Extensions.DependencyInjection;
 using MouseSimulator;
 using MouseSimulator.Interfaces;
+using MediatR;
+using System.Reflection;
+using AutoClick.Notifications;
+using AutoClick.Services.Timer;
 
 namespace AutoClick.Extensions
 {
@@ -42,23 +46,26 @@ namespace AutoClick.Extensions
         var dict = new Dictionary<ClickTimeFrame, ITimeService>
         {
           {
-            ClickTimeFrame.Continous,
-            new Services.Timer.ContinousTimeService(sp.GetRequiredService<AutoClickTimer>(),
-            sp.GetRequiredService<IMouseActionService>())
+            ClickTimeFrame.Continuous,
+            new Services.Timer.ContinuousTimeService(
+              sp.GetRequiredService<IMouseActionService>(),
+              sp.GetRequiredService<ICommandHandler<StopAutoClickCommand>>(),
+              sp.GetRequiredService<ITimerPublisher>())
           },
           {
             ClickTimeFrame.Repeat,
-            new Services.Timer.RepeatTimeService(sp.GetRequiredService<AutoClickTimer>(),
-              sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
-              sp.GetRequiredService<IMouseActionService>())
-          },
-          {
-            ClickTimeFrame.TimePeriod,
-            new Services.Timer.TimePeriodTimeService(sp.GetRequiredService<AutoClickTimer>(),
-              sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
+            new Services.Timer.TimeService(
+              sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),              
               sp.GetRequiredService<IMouseActionService>(),
-              sp.GetRequiredService<IValidator<Time>>())
-          }
+              sp.GetRequiredService<ITimerPublisher>())
+          },
+          //{
+          //  ClickTimeFrame.TimePeriod,
+          //  new Services.Timer.TimePeriodTimeService(sp.GetRequiredService<AutoClickTimer>(),
+          //    sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
+          //    sp.GetRequiredService<IMouseActionService>(),
+          //    sp.GetRequiredService<IValidator<Time>>())
+          //}
         };
 
         return new Composites.TimeServiceComposite(dict);
@@ -68,23 +75,23 @@ namespace AutoClick.Extensions
 
       #region Factories
       services.AddScoped<ITimeFrameFactory, Factories.TimeFrameFactory>();
+      services.AddMediatR(Assembly.GetExecutingAssembly());
       #endregion
 
       #region Services
       services.AddSingleton<IMouseActionService, MouseActionService>();
       services.AddScoped<IUserSettingsService, UserSettingsService>();
+      services.AddScoped<IHotKeyService, HotKeyService>();
       //services.AddSingleton<IStatsService, StatsService>();
-      #endregion
-
-      services.AddSingleton<AutoClickTimer>((sp) =>
-      {
-        return new AutoClickTimer();
-      });
+      //services.AddScoped<ITimeService, TimeService>();
+      #endregion      
             
       #region Validators
       services.AddScoped<IValidator<Setup>, Validators.SetupValidator>();
       services.AddScoped<IValidator<Time>, Validators.TimeIntervalValidator>();
       #endregion
+
+      services.AddSingleton<ITimerPublisher, TimerPublisher>();
     }
   }
 }

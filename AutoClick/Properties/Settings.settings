@@ -5,5 +5,8 @@
     <Setting Name="StopKey" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">121</Value>
     </Setting>
+    <Setting Name="StopKeyId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -34,5 +34,17 @@ namespace AutoClick.Properties {
                 this["StopKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int StopKeyId {
+            get {
+                return ((int)(this["StopKeyId"]));
+            }
+            set {
+                this["StopKeyId"] = value;
+            }
+        }
     }
 }

@@ -29,6 +29,8 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      AC.Framework.Models.Time time2 = new AC.Framework.Models.Time();
+      AC.Framework.Models.Repeater repeater2 = new AC.Framework.Models.Repeater();
       this.btnStart = new System.Windows.Forms.Button();
       this.btnStop = new System.Windows.Forms.Button();
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -38,35 +40,18 @@
       this.numX = new System.Windows.Forms.NumericUpDown();
       this.chkCurrentLocation = new System.Windows.Forms.CheckBox();
       this.grpBoxActions = new System.Windows.Forms.GroupBox();
-      this.numHours = new System.Windows.Forms.NumericUpDown();
-      this.numMinutes = new System.Windows.Forms.NumericUpDown();
-      this.numSeconds = new System.Windows.Forms.NumericUpDown();
-      this.numMilliseconds = new System.Windows.Forms.NumericUpDown();
       this.lblErrorMessage = new System.Windows.Forms.Label();
-      this.grpBoxRepeat = new System.Windows.Forms.GroupBox();
-      this.numRepeats = new System.Windows.Forms.NumericUpDown();
-      this.lblHours = new System.Windows.Forms.Label();
-      this.lblMinutes = new System.Windows.Forms.Label();
-      this.lblSeconds = new System.Windows.Forms.Label();
-      this.groupBox1 = new System.Windows.Forms.GroupBox();
-      this.lblIntervalHelp = new System.Windows.Forms.Label();
-      this.lblMilliseconds = new System.Windows.Forms.Label();
       this.grpBoxStats = new System.Windows.Forms.GroupBox();
       this.btnResetStats = new System.Windows.Forms.Button();
       this.lblTotalClicks = new System.Windows.Forms.Label();
       this.lblTotalClicksName = new System.Windows.Forms.Label();
       this.grpBoxLocation = new System.Windows.Forms.GroupBox();
+      this.clickIntervalViewForRepeat = new AutoClick.Controls.ClickIntervalView();
       this.btnHotKey = new System.Windows.Forms.Button();
+      this.repeaterView1 = new AutoClick.Controls.RepeaterView();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numHours)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numSeconds)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numMilliseconds)).BeginInit();
-      this.grpBoxRepeat.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.numRepeats)).BeginInit();
-      this.groupBox1.SuspendLayout();
       this.grpBoxStats.SuspendLayout();
       this.grpBoxLocation.SuspendLayout();
       this.SuspendLayout();
@@ -164,54 +149,6 @@
       this.grpBoxActions.TabIndex = 11;
       this.grpBoxActions.TabStop = false;
       // 
-      // numHours
-      // 
-      this.numHours.Location = new System.Drawing.Point(53, 99);
-      this.numHours.Name = "numHours";
-      this.numHours.Size = new System.Drawing.Size(250, 47);
-      this.numHours.TabIndex = 12;
-      this.numHours.Validating += new System.ComponentModel.CancelEventHandler(this.numHours_Validating);
-      // 
-      // numMinutes
-      // 
-      this.numMinutes.Location = new System.Drawing.Point(390, 99);
-      this.numMinutes.Name = "numMinutes";
-      this.numMinutes.Size = new System.Drawing.Size(250, 47);
-      this.numMinutes.TabIndex = 13;
-      this.numMinutes.Validating += new System.ComponentModel.CancelEventHandler(this.numMinutes_Validating);
-      // 
-      // numSeconds
-      // 
-      this.numSeconds.DecimalPlaces = 2;
-      this.numSeconds.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-      this.numSeconds.Location = new System.Drawing.Point(750, 99);
-      this.numSeconds.Name = "numSeconds";
-      this.numSeconds.Size = new System.Drawing.Size(250, 47);
-      this.numSeconds.TabIndex = 14;
-      this.numSeconds.Validating += new System.ComponentModel.CancelEventHandler(this.numSeconds_Validating);
-      // 
-      // numMilliseconds
-      // 
-      this.numMilliseconds.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-      this.numMilliseconds.Location = new System.Drawing.Point(53, 217);
-      this.numMilliseconds.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-      this.numMilliseconds.Name = "numMilliseconds";
-      this.numMilliseconds.Size = new System.Drawing.Size(250, 47);
-      this.numMilliseconds.TabIndex = 15;
-      this.numMilliseconds.Validating += new System.ComponentModel.CancelEventHandler(this.numMilliseconds_Validating);
-      // 
       // lblErrorMessage
       // 
       this.lblErrorMessage.AutoSize = true;
@@ -220,97 +157,6 @@
       this.lblErrorMessage.Name = "lblErrorMessage";
       this.lblErrorMessage.Size = new System.Drawing.Size(0, 41);
       this.lblErrorMessage.TabIndex = 16;
-      // 
-      // grpBoxRepeat
-      // 
-      this.grpBoxRepeat.Controls.Add(this.numRepeats);
-      this.grpBoxRepeat.Location = new System.Drawing.Point(38, 372);
-      this.grpBoxRepeat.Name = "grpBoxRepeat";
-      this.grpBoxRepeat.Size = new System.Drawing.Size(500, 227);
-      this.grpBoxRepeat.TabIndex = 17;
-      this.grpBoxRepeat.TabStop = false;
-      this.grpBoxRepeat.Text = "Repeats";
-      // 
-      // numRepeats
-      // 
-      this.numRepeats.Location = new System.Drawing.Point(64, 118);
-      this.numRepeats.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-      this.numRepeats.Name = "numRepeats";
-      this.numRepeats.Size = new System.Drawing.Size(250, 47);
-      this.numRepeats.TabIndex = 0;
-      // 
-      // lblHours
-      // 
-      this.lblHours.AutoSize = true;
-      this.lblHours.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.lblHours.Location = new System.Drawing.Point(53, 55);
-      this.lblHours.Name = "lblHours";
-      this.lblHours.Size = new System.Drawing.Size(102, 41);
-      this.lblHours.TabIndex = 18;
-      this.lblHours.Text = "Hours";
-      // 
-      // lblMinutes
-      // 
-      this.lblMinutes.AutoSize = true;
-      this.lblMinutes.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.lblMinutes.Location = new System.Drawing.Point(390, 55);
-      this.lblMinutes.Name = "lblMinutes";
-      this.lblMinutes.Size = new System.Drawing.Size(133, 41);
-      this.lblMinutes.TabIndex = 19;
-      this.lblMinutes.Text = "Minutes";
-      // 
-      // lblSeconds
-      // 
-      this.lblSeconds.AutoSize = true;
-      this.lblSeconds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.lblSeconds.Location = new System.Drawing.Point(741, 55);
-      this.lblSeconds.Name = "lblSeconds";
-      this.lblSeconds.Size = new System.Drawing.Size(133, 41);
-      this.lblSeconds.TabIndex = 20;
-      this.lblSeconds.Text = "Seconds";
-      // 
-      // groupBox1
-      // 
-      this.groupBox1.Controls.Add(this.lblIntervalHelp);
-      this.groupBox1.Controls.Add(this.lblMilliseconds);
-      this.groupBox1.Controls.Add(this.lblHours);
-      this.groupBox1.Controls.Add(this.lblSeconds);
-      this.groupBox1.Controls.Add(this.numHours);
-      this.groupBox1.Controls.Add(this.lblMinutes);
-      this.groupBox1.Controls.Add(this.numSeconds);
-      this.groupBox1.Controls.Add(this.numMilliseconds);
-      this.groupBox1.Controls.Add(this.numMinutes);
-      this.groupBox1.Location = new System.Drawing.Point(49, 12);
-      this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(1209, 312);
-      this.groupBox1.TabIndex = 21;
-      this.groupBox1.TabStop = false;
-      this.groupBox1.Text = "Click Interval";
-      // 
-      // lblIntervalHelp
-      // 
-      this.lblIntervalHelp.AutoSize = true;
-      this.lblIntervalHelp.Location = new System.Drawing.Point(407, 184);
-      this.lblIntervalHelp.MaximumSize = new System.Drawing.Size(500, 100);
-      this.lblIntervalHelp.Name = "lblIntervalHelp";
-      this.lblIntervalHelp.Size = new System.Drawing.Size(97, 41);
-      this.lblIntervalHelp.TabIndex = 22;
-      this.lblIntervalHelp.Text = "label1";
-      // 
-      // lblMilliseconds
-      // 
-      this.lblMilliseconds.AutoSize = true;
-      this.lblMilliseconds.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.lblMilliseconds.Location = new System.Drawing.Point(53, 165);
-      this.lblMilliseconds.Name = "lblMilliseconds";
-      this.lblMilliseconds.Size = new System.Drawing.Size(194, 41);
-      this.lblMilliseconds.TabIndex = 21;
-      this.lblMilliseconds.Text = "Milliseconds";
-      this.lblMilliseconds.Click += new System.EventHandler(this.lblMilliseconds_Click);
       // 
       // grpBoxStats
       // 
@@ -367,6 +213,34 @@
       this.grpBoxLocation.TabStop = false;
       this.grpBoxLocation.Text = "Location";
       // 
+      // clickIntervalViewForRepeat
+      // 
+      time2.Hours = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      time2.Milliseconds = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      time2.Minutes = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      time2.Seconds = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+      this.clickIntervalViewForRepeat.IntervalTime = time2;
+      this.clickIntervalViewForRepeat.Location = new System.Drawing.Point(12, -4);
+      this.clickIntervalViewForRepeat.Name = "clickIntervalViewForRepeat";
+      this.clickIntervalViewForRepeat.Size = new System.Drawing.Size(1226, 389);
+      this.clickIntervalViewForRepeat.TabIndex = 24;
+      // 
       // btnHotKey
       // 
       this.btnHotKey.Location = new System.Drawing.Point(1054, 851);
@@ -377,34 +251,34 @@
       this.btnHotKey.UseVisualStyleBackColor = true;
       this.btnHotKey.Click += new System.EventHandler(this.btnHotKey_Click);
       // 
+      // repeaterView1
+      // 
+      this.repeaterView1.Location = new System.Drawing.Point(12, 372);
+      this.repeaterView1.Name = "repeaterView1";
+      repeater2.Repeats = true;
+      repeater2.RepeatsFor = 100;
+      this.repeaterView1.Repeater = repeater2;
+      this.repeaterView1.Size = new System.Drawing.Size(630, 250);
+      this.repeaterView1.TabIndex = 25;
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1308, 1190);
+      this.Controls.Add(this.repeaterView1);
+      this.Controls.Add(this.clickIntervalViewForRepeat);
       this.Controls.Add(this.btnHotKey);
       this.Controls.Add(this.grpBoxLocation);
       this.Controls.Add(this.grpBoxStats);
-      this.Controls.Add(this.groupBox1);
-      this.Controls.Add(this.grpBoxRepeat);
       this.Controls.Add(this.lblErrorMessage);
       this.Controls.Add(this.grpBoxActions);
       this.KeyPreview = true;
       this.Name = "formAutoClick";
       this.Text = "Auto Clicker";
-      this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
-      this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form2_KeyPress);
       ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
       this.grpBoxActions.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.numHours)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numSeconds)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.numMilliseconds)).EndInit();
-      this.grpBoxRepeat.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.numRepeats)).EndInit();
-      this.groupBox1.ResumeLayout(false);
-      this.groupBox1.PerformLayout();
       this.grpBoxStats.ResumeLayout(false);
       this.grpBoxStats.PerformLayout();
       this.grpBoxLocation.ResumeLayout(false);
@@ -429,24 +303,14 @@
     private NumericUpDown numY;
     private NumericUpDown numX;
     private CheckBox chkCurrentLocation;
-    private NumericUpDown numMilliseconds;
-    private NumericUpDown numSeconds;
-    private NumericUpDown numMinutes;
-    private NumericUpDown numHours;
     private Label lblErrorMessage;
-    private GroupBox grpBoxRepeat;
-    private NumericUpDown numRepeats;
-    private Label lblHours;
-    private Label lblMinutes;
-    private Label lblSeconds;
-    private GroupBox groupBox1;
-    private Label lblIntervalHelp;
-    private Label lblMilliseconds;
     private GroupBox grpBoxStats;
     private Button btnResetStats;
     private Label lblTotalClicks;
     private Label lblTotalClicksName;
     private GroupBox grpBoxLocation;
+    private Controls.ClickIntervalView clickIntervalViewForRepeat;
     private Button btnHotKey;
+    private Controls.RepeaterView repeaterView1;
   }
 }

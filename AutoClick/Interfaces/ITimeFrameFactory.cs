@@ -5,6 +5,6 @@ namespace AutoClick.Interfaces
 {
   public interface ITimeFrameFactory
   {
-    ClickTimeFrame Get(Setup setup);
+    ClickTimeFrame Get(Repeater repeaterSetup);
   }
 }

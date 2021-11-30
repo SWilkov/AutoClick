@@ -24,7 +24,7 @@ namespace AutoClick.Validators
         info.Message = intervalValdation.Message;
       }
 
-      if (item.RepeatsFor < 0)
+      if (item.Repeater?.RepeatsFor < 0)
       {
         info.Result = ValidationResult.Invalid;
         info.Message += $" Invalid RepeatFor cannot be a minus value";
