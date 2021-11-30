@@ -7,8 +7,9 @@ namespace AutoClick.Interfaces
   {
     event EventHandler<TimerEventArgs> TimerEndedEvent;
     event EventHandler<TimerEventArgs> TimerStartedEvent;
-
+    event EventHandler<TimerEventArgs > TimerTickEvent;
     void TimerEnded();
     void TimerStarted();
+    void TimerTick();
   }
 }

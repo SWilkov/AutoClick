@@ -45,6 +45,7 @@
       this.clickIntervalViewForRepeat = new AutoClick.Controls.ClickIntervalView();
       this.repeaterView = new AutoClick.Controls.RepeaterView();
       this.clickStatistics1 = new AutoClick.Controls.ClickStatistics();
+      this.repeaterProgress1 = new AutoClick.Controls.RepeaterProgress();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -182,6 +183,7 @@
       // 
       // clickIntervalViewForRepeat
       // 
+      this.clickIntervalViewForRepeat.ErrorMessage = "Need to set a click interval.";
       time1.Hours = new decimal(new int[] {
             0,
             0,
@@ -225,11 +227,20 @@
       this.clickStatistics1.Size = new System.Drawing.Size(1000, 247);
       this.clickStatistics1.TabIndex = 26;
       // 
+      // repeaterProgress1
+      // 
+      this.repeaterProgress1.Location = new System.Drawing.Point(275, 1225);
+      this.repeaterProgress1.Maximum = 50;
+      this.repeaterProgress1.Name = "repeaterProgress1";
+      this.repeaterProgress1.Size = new System.Drawing.Size(733, 181);
+      this.repeaterProgress1.TabIndex = 27;
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1308, 1231);
+      this.ClientSize = new System.Drawing.Size(1308, 1498);
+      this.Controls.Add(this.repeaterProgress1);
       this.Controls.Add(this.clickStatistics1);
       this.Controls.Add(this.repeaterView);
       this.Controls.Add(this.clickIntervalViewForRepeat);
@@ -270,5 +281,6 @@
     private Button btnHotKey;
     private Controls.RepeaterView repeaterView;
     private Controls.ClickStatistics clickStatistics1;
+    private Controls.RepeaterProgress repeaterProgress1;
   }
 }
