@@ -58,18 +58,25 @@ namespace AutoClick
       this.btnStop.Enabled = false;
       this.btnStop.Text = $"Stop (Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
 
-      ClickStats.Instance.PropertyChanged += (s, e) =>
-      {
-        Console.WriteLine(e.PropertyName);
-      };
-
+      #region Events
       _timerPublisher.TimerEndedEvent += (s, e) =>
       {
         Console.WriteLine("Timer Ended Event!");
         btnStart.Enabled = true;
         btnStop.Enabled = false;
       };
+
+      clickIntervalViewForRepeat.IntervalChangedEvent += (s, e) =>
+      {
+        Console.WriteLine($"{e.Result}");
+        this.btnStart.Enabled = e.Result == ValidationResult.Valid;
+      };
+
+
+
+      #endregion
       _timeService = timeService;
+      btnStart.Enabled = false;
     }
 
     protected override void WndProc(ref Message m)
@@ -87,9 +94,7 @@ namespace AutoClick
     {
       if (_timerPublisher != null)
         _timerPublisher.TimerEndedEvent -= (s, e) => { };
-      if (ClickStats.Instance != null)
-        ClickStats.Instance.PropertyChanged -= (s, e) => { };
-
+     
       _hotKeyService.UnregisterHotKeyWrapper(this.Handle, STOPCLICKS_HOTKEY_ID);
       base.OnFormClosing(e);
     }
@@ -149,7 +154,7 @@ namespace AutoClick
 
       //this.numRepeats.DataBindings.Add("Value", _setup, "RepeatsFor", true, DataSourceUpdateMode.OnPropertyChanged);
            
-      lblTotalClicks.DataBindings.Add("Text", ClickStats.Instance, "Total", true, DataSourceUpdateMode.OnPropertyChanged);
+      //lblTotalClicks.DataBindings.Add("Text", ClickStats.Instance, "Total", true, DataSourceUpdateMode.OnPropertyChanged);
     }
 
    
@@ -165,9 +170,13 @@ namespace AutoClick
         lblErrorMessage.Text = validation.Message;
       }
 
-      _setup.Repeater = repeaterView1.Repeater;
+      _setup.Repeater = new Repeater
+      {
+        Repeats = repeaterView.Repeats,
+        RepeatsFor = repeaterView.RepeatsFor
+      };      
 
-      var timeFrame = _timeFrameFactory.Get(repeaterView1.Repeater);
+      var timeFrame = _timeFrameFactory.Get(_setup.Repeater);
       var timeIntervalCommand = new TimerIntervalCommand(clickIntervalViewForRepeat.IntervalTime);
       _timeIntervalHandler.Handle(timeIntervalCommand);
 

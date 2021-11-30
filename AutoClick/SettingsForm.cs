@@ -10,6 +10,8 @@ namespace AutoClick
       get { return _userSettings; }
     }
 
+
+
     public SettingsForm()
     {
       InitializeComponent();

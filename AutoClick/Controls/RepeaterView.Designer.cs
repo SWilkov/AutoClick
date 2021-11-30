@@ -61,7 +61,7 @@
       // 
       // numRepeats
       // 
-      this.numRepeats.Location = new System.Drawing.Point(279, 78);
+      this.numRepeats.Location = new System.Drawing.Point(257, 56);
       this.numRepeats.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -75,10 +75,11 @@
       // grpRepeater
       // 
       this.grpRepeater.Controls.Add(this.btnRepeat);
+      this.grpRepeater.Controls.Add(this.numRepeats);
       this.grpRepeater.Controls.Add(this.btnContinous);
       this.grpRepeater.Location = new System.Drawing.Point(20, 24);
       this.grpRepeater.Name = "grpRepeater";
-      this.grpRepeater.Size = new System.Drawing.Size(239, 214);
+      this.grpRepeater.Size = new System.Drawing.Size(563, 214);
       this.grpRepeater.TabIndex = 3;
       this.grpRepeater.TabStop = false;
       // 
@@ -87,7 +88,6 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.grpRepeater);
-      this.Controls.Add(this.numRepeats);
       this.Name = "RepeaterView";
       this.Size = new System.Drawing.Size(613, 275);
       ((System.ComponentModel.ISupportInitialize)(this.numRepeats)).EndInit();

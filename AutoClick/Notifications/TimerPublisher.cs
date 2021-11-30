@@ -1,10 +1,20 @@
-﻿namespace AutoClick.Notifications
+﻿using AC.Utils.Models;
+
+namespace AutoClick.Notifications
 {
   public class TimerEventArgs : EventArgs
   {
     public TimerEventArgs()
     {
 
+    }
+  }
+  public class IntervalChangedEventArgs : EventArgs
+  {
+    public ValidationResult Result { get; private set; }
+    public IntervalChangedEventArgs(ValidationResult result)
+    {
+      this.Result = result;
     }
   }
 
@@ -24,6 +34,7 @@
       OnTimerEnded(new TimerEventArgs());
     }
 
+   
     protected virtual void OnTimerStarted(TimerEventArgs e)
     {
       var timerStartedEvent = TimerStartedEvent;
@@ -45,5 +56,7 @@
         timerEndedEvent(this, e);
       }
     }
+
+    
   }
 }
