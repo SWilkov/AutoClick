@@ -3,5 +3,6 @@
   public interface IUserSettingsService
   {
     int GetStopKey();
+    int GetStopKeyId();
   }
 }

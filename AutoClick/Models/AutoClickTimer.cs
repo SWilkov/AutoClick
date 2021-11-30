@@ -3,13 +3,20 @@
   public class AutoClickTimer 
   {
     public System.Windows.Forms.Timer IntervalTimer { get; private set; }
-    public System.Windows.Forms.Timer TimePeriodTimer { get; private set; }
+
     public AutoClickTimer()
     {
-      if (this.IntervalTimer == null)
-        this.IntervalTimer = new System.Windows.Forms.Timer();
-      if (this.TimePeriodTimer == null)
-        this.TimePeriodTimer = new System.Windows.Forms.Timer();
+      IntervalTimer = new System.Windows.Forms.Timer();
+    }
+    
+    public static readonly AutoClickTimer Instance = new AutoClickTimer();
+
+    public void DisposeEvents()
+    {
+      if (IntervalTimer != null)
+      {
+        IntervalTimer.Tick -= (s, e) => { };
+      }
     }
   }
 

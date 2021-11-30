@@ -5,6 +5,6 @@ namespace AutoClick.Interfaces
 {
   public interface ITimeService
   {
-    void Run(ClickTimeFrame timeFrame, int interval, int repeatsFor);
+    void Run(ClickTimeFrame timeFrame);
   }
 }

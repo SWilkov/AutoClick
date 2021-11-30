@@ -9,7 +9,7 @@ namespace AutoClick.Commands
     public int Milliseconds { get; set; } //always set milliseconds
     public TimerIntervalCommand(Time? interval)
     {
-      this.Interval = Interval;
+      this.Interval = interval;
     }
   }
 }

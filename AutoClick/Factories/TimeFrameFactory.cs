@@ -6,17 +6,11 @@ namespace AutoClick.Factories
 {
   public class TimeFrameFactory : ITimeFrameFactory
   {
-    public ClickTimeFrame Get(Setup setup)
+    public ClickTimeFrame Get(Repeater repeaterSetup)
     {
-      if (setup == null) throw new ArgumentNullException(nameof(setup));
+      if (repeaterSetup == null) throw new ArgumentNullException(nameof(repeaterSetup));
 
-      if (setup.Repeats)
-        return ClickTimeFrame.Repeat;
-
-      if (setup.RunningTime.Enabled)
-        return ClickTimeFrame.TimePeriod;
-
-      return ClickTimeFrame.Continous;
+      return repeaterSetup.Repeats ? ClickTimeFrame.Repeat : ClickTimeFrame.Continuous;
     }
   }
 }

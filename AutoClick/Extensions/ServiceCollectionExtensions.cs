@@ -10,6 +10,7 @@ using MouseSimulator.Interfaces;
 using MediatR;
 using System.Reflection;
 using AutoClick.Notifications;
+using AutoClick.Services.Timer;
 
 namespace AutoClick.Extensions
 {
@@ -44,15 +45,17 @@ namespace AutoClick.Extensions
       {
         var dict = new Dictionary<ClickTimeFrame, ITimeService>
         {
-          //{
-          //  ClickTimeFrame.Continous,
-          //  new Services.Timer.ContinousTimeService(sp.GetRequiredService<AutoClickTimer>(),
-          //  sp.GetRequiredService<IMouseActionService>())
-          //},
+          {
+            ClickTimeFrame.Continuous,
+            new Services.Timer.ContinuousTimeService(
+              sp.GetRequiredService<IMouseActionService>(),
+              sp.GetRequiredService<ICommandHandler<StopAutoClickCommand>>(),
+              sp.GetRequiredService<ITimerPublisher>())
+          },
           {
             ClickTimeFrame.Repeat,
-            new Services.Timer.RepeatTimeService(
-              sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),
+            new Services.Timer.TimeService(
+              sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),              
               sp.GetRequiredService<IMouseActionService>(),
               sp.GetRequiredService<ITimerPublisher>())
           },
@@ -78,13 +81,10 @@ namespace AutoClick.Extensions
       #region Services
       services.AddSingleton<IMouseActionService, MouseActionService>();
       services.AddScoped<IUserSettingsService, UserSettingsService>();
+      services.AddScoped<IHotKeyService, HotKeyService>();
       //services.AddSingleton<IStatsService, StatsService>();
-      #endregion
-
-      services.AddSingleton<AutoClickTimer>((sp) =>
-      {
-        return new AutoClickTimer();
-      });
+      //services.AddScoped<ITimeService, TimeService>();
+      #endregion      
             
       #region Validators
       services.AddScoped<IValidator<Setup>, Validators.SetupValidator>();

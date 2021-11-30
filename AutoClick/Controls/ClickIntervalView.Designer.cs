@@ -1,4 +1,4 @@
-﻿namespace AutoClick
+﻿namespace AutoClick.Controls
 {
   partial class ClickIntervalView
   {

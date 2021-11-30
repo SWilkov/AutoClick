@@ -12,8 +12,8 @@ namespace AC.Framework.Models
       if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private double _hours = 0;
-    public double Hours
+    private decimal _hours = 0;
+    public decimal Hours
     {
       get {  return _hours; }
       set
@@ -24,8 +24,8 @@ namespace AC.Framework.Models
       }
     }
 
-    private double _minutes = 0;
-    public double Minutes
+    private decimal _minutes = 0;
+    public decimal Minutes
     {
       get { return _minutes; }
       set
@@ -36,8 +36,8 @@ namespace AC.Framework.Models
       }
     }
 
-    private double _seconds = 0;
-    public double Seconds
+    private decimal _seconds = 0;
+    public decimal Seconds
     {
       get => _seconds;
       set
@@ -48,8 +48,8 @@ namespace AC.Framework.Models
       }
     }
 
-    private int _milliseconds = 0;
-    public int Milliseconds
+    private decimal _milliseconds = 0;
+    public decimal Milliseconds
     {
       get => (_milliseconds == 0) ? 0 : _milliseconds;
       set

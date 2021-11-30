@@ -3,76 +3,56 @@ using AC.Utils.Interfaces;
 using AutoClick.Commands;
 using AutoClick.Interfaces;
 using AutoClick.Models;
-using AutoClick.Notifications;
 using MouseSimulator.Interfaces;
 
 namespace AutoClick.Services.Timer
 {
   public class RepeatTimeService : ITimeService
   {
-    //private readonly AutoClickTimer _timer;
-    private System.Windows.Forms.Timer _intervalTimer;
     private readonly ICommandHandler<TimerIntervalCommand> _intervalHandler;
+    private readonly ICommandHandler<StopAutoClickCommand> _stopAutoClickHandler;
     private readonly IMouseActionService _mouseActionService;
-    private readonly ITimerPublisher _timerPublisher;
+
     private int count = 0;
 
-    //private readonly IStatsService _statsService;
 
-    public RepeatTimeService(//AutoClickTimer timer,
+    public RepeatTimeService(
       ICommandHandler<TimerIntervalCommand> intervalHandler,
-      IMouseActionService mouseActionService,
-      ITimerPublisher timerPublisher)
+      ICommandHandler<StopAutoClickCommand> stopAutoClickHandler,
+      IMouseActionService mouseActionService)
     {
-      //_timer = timer;
-      _intervalTimer = new System.Windows.Forms.Timer();
       _intervalHandler = intervalHandler;
+      _stopAutoClickHandler = stopAutoClickHandler;
       _mouseActionService = mouseActionService;
-      _timerPublisher = timerPublisher;
 
-      _intervalTimer.Tick += (sender, args) =>
+      AutoClickTimer.Instance.IntervalTimer.Tick += (sender, args) =>
       {
-
         if (count >= ClickerConfiguration.RepeatsFor)
         {
-          _intervalTimer.Stop();
-          _timerPublisher.TimerEnded();
+          _stopAutoClickHandler.Handle(new StopAutoClickCommand());
           count = 0;
-          Dispose();
         }
         else
         {
-
           //Left mouse button click
           _mouseActionService.LeftMouseButtonDown();
           _mouseActionService.LeftMouseButtonUp();
-          //_statsService.AddToClicks();
           ClickStats.Instance.Add();
           count++;
         }
       };
     }
 
-    public void Run(ClickTimeFrame timeFrame, int interval, int repeatsFor)
+    public void Run(ClickTimeFrame timeFrame)
     {
-      //if (config == null) throw new ArgumentNullException(nameof(config));
       if (timeFrame != ClickTimeFrame.Repeat) throw new ArgumentException($"Incorrect time frame detected: Expected Continous received {timeFrame.ToString()}");
+      if (ClickerConfiguration.RepeatsFor < default(int)) throw new ArgumentException($"Setup indicates incorrect setup");
 
-      if (repeatsFor < default(int)) throw new ArgumentException($"Setup indicates incorrect setup");
-      if (_intervalTimer.Enabled)
-        _intervalTimer.Stop();
+      if (AutoClickTimer.Instance.IntervalTimer.Enabled)
+        _stopAutoClickHandler.Handle(new StopAutoClickCommand());
 
-      _intervalTimer.Interval = ClickerConfiguration.Interval;      
-      _intervalTimer.Start();
-    }
-
-    public void Dispose()
-    {
-      if (_intervalTimer != null)
-      {
-        _intervalTimer.Tick -= (sender, args) => { };
-        _intervalTimer.Dispose();
-      }
+      AutoClickTimer.Instance.IntervalTimer.Interval = ClickerConfiguration.Interval;
+      AutoClickTimer.Instance.IntervalTimer.Start();
     }
   }
 

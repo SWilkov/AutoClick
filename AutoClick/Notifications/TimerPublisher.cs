@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoClick.Notifications
+﻿namespace AutoClick.Notifications
 {
   public class TimerEventArgs : EventArgs
   {
