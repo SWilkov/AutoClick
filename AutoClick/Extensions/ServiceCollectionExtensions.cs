@@ -82,7 +82,7 @@ namespace AutoClick.Extensions
       services.AddSingleton<IMouseActionService, MouseActionService>();
       services.AddScoped<IUserSettingsService, UserSettingsService>();
       services.AddScoped<IHotKeyService, HotKeyService>();
-      //services.AddSingleton<IStatsService, StatsService>();
+      services.AddSingleton<IClickStatsService, ClickStatsService>();
       //services.AddScoped<ITimeService, TimeService>();
       #endregion      
             

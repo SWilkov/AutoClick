@@ -5,7 +5,7 @@ namespace AC.Framework.Models
 {
   public class Repeater : INotifyPropertyChanged
   {
-    private bool _repeats = true;
+    private bool _repeats;
     public bool Repeats
     {
       get { return _repeats; }
@@ -17,7 +17,7 @@ namespace AC.Framework.Models
         OnPropertyChanged();
       }
     }
-    private int _repeatsFor = 100;
+    private int _repeatsFor;
     public int RepeatsFor
     {
       get { return _repeatsFor; }
