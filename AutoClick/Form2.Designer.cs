@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      AC.Framework.Models.Time time1 = new AC.Framework.Models.Time();
+      AC.Framework.Models.Time time2 = new AC.Framework.Models.Time();
       this.btnStart = new System.Windows.Forms.Button();
       this.btnStop = new System.Windows.Forms.Button();
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -56,7 +56,7 @@
       // btnStart
       // 
       this.btnStart.BackColor = System.Drawing.Color.SpringGreen;
-      this.btnStart.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.btnStart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.btnStart.Location = new System.Drawing.Point(84, 51);
       this.btnStart.Name = "btnStart";
       this.btnStart.Size = new System.Drawing.Size(377, 112);
@@ -69,13 +69,13 @@
       // btnStop
       // 
       this.btnStop.BackColor = System.Drawing.Color.DarkGray;
-      this.btnStop.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.btnStop.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.btnStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
       this.btnStop.Location = new System.Drawing.Point(672, 51);
       this.btnStop.Name = "btnStop";
       this.btnStop.Size = new System.Drawing.Size(402, 112);
       this.btnStop.TabIndex = 5;
-      this.btnStop.Text = "Stop   Ctrl + F12";
+      this.btnStop.Text = "Stop   ";
       this.btnStop.UseVisualStyleBackColor = false;
       this.btnStop.EnabledChanged += new System.EventHandler(this.btnStop_EnabledChanged);
       this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
@@ -151,11 +151,11 @@
       // 
       this.btnHotKey.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
       this.btnHotKey.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-      this.btnHotKey.Location = new System.Drawing.Point(783, 189);
+      this.btnHotKey.Location = new System.Drawing.Point(729, 204);
       this.btnHotKey.Name = "btnHotKey";
-      this.btnHotKey.Size = new System.Drawing.Size(217, 88);
+      this.btnHotKey.Size = new System.Drawing.Size(322, 88);
       this.btnHotKey.TabIndex = 24;
-      this.btnHotKey.Text = "Set Stop Key";
+      this.btnHotKey.Text = "Change Start Stop Key";
       this.btnHotKey.UseVisualStyleBackColor = true;
       this.btnHotKey.Click += new System.EventHandler(this.btnHotKey_Click);
       // 
@@ -185,27 +185,27 @@
       // clickIntervalViewForRepeat
       // 
       this.clickIntervalViewForRepeat.ErrorMessage = "Need to set a click interval.";
-      time1.Hours = new decimal(new int[] {
+      time2.Hours = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      time1.Milliseconds = new decimal(new int[] {
+      time2.Milliseconds = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      time1.Minutes = new decimal(new int[] {
+      time2.Minutes = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      time1.Seconds = new decimal(new int[] {
+      time2.Seconds = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.clickIntervalViewForRepeat.IntervalTime = time1;
+      this.clickIntervalViewForRepeat.IntervalTime = time2;
       this.clickIntervalViewForRepeat.Location = new System.Drawing.Point(12, -4);
       this.clickIntervalViewForRepeat.Name = "clickIntervalViewForRepeat";
       this.clickIntervalViewForRepeat.Size = new System.Drawing.Size(1226, 389);
