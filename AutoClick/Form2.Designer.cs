@@ -29,7 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      AC.Framework.Models.Time time2 = new AC.Framework.Models.Time();
+      AC.Framework.Models.Time time1 = new AC.Framework.Models.Time();
       this.btnStart = new System.Windows.Forms.Button();
       this.btnStop = new System.Windows.Forms.Button();
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -47,6 +47,8 @@
       this.clickStatistics1 = new AutoClick.Controls.ClickStatistics();
       this.repeaterProgress1 = new AutoClick.Controls.RepeaterProgress();
       this.btnReset = new System.Windows.Forms.Button();
+      this.label1 = new System.Windows.Forms.Label();
+      this.lblStartStop = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -137,6 +139,8 @@
       // 
       // grpBoxActions
       // 
+      this.grpBoxActions.Controls.Add(this.lblStartStop);
+      this.grpBoxActions.Controls.Add(this.label1);
       this.grpBoxActions.Controls.Add(this.btnStart);
       this.grpBoxActions.Controls.Add(this.btnStop);
       this.grpBoxActions.Controls.Add(this.btnHotKey);
@@ -185,27 +189,27 @@
       // clickIntervalViewForRepeat
       // 
       this.clickIntervalViewForRepeat.ErrorMessage = "Need to set a click interval.";
-      time2.Hours = new decimal(new int[] {
+      time1.Hours = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      time2.Milliseconds = new decimal(new int[] {
+      time1.Milliseconds = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      time2.Minutes = new decimal(new int[] {
+      time1.Minutes = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      time2.Seconds = new decimal(new int[] {
+      time1.Seconds = new decimal(new int[] {
             0,
             0,
             0,
             0});
-      this.clickIntervalViewForRepeat.IntervalTime = time2;
+      this.clickIntervalViewForRepeat.IntervalTime = time1;
       this.clickIntervalViewForRepeat.Location = new System.Drawing.Point(12, -4);
       this.clickIntervalViewForRepeat.Name = "clickIntervalViewForRepeat";
       this.clickIntervalViewForRepeat.Size = new System.Drawing.Size(1226, 389);
@@ -246,6 +250,24 @@
       this.btnReset.UseVisualStyleBackColor = true;
       this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
       // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(92, 223);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(374, 46);
+      this.label1.TabIndex = 25;
+      this.label1.Text = "Current Start/Stop Key:";
+      // 
+      // lblStartStop
+      // 
+      this.lblStartStop.AutoSize = true;
+      this.lblStartStop.Location = new System.Drawing.Point(487, 228);
+      this.lblStartStop.Name = "lblStartStop";
+      this.lblStartStop.Size = new System.Drawing.Size(112, 46);
+      this.lblStartStop.TabIndex = 26;
+      this.lblStartStop.Text = "label2";
+      // 
       // formAutoClick
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
@@ -265,6 +287,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
       this.grpBoxActions.ResumeLayout(false);
+      this.grpBoxActions.PerformLayout();
       this.grpBoxLocation.ResumeLayout(false);
       this.grpBoxLocation.PerformLayout();
       this.ResumeLayout(false);
@@ -295,5 +318,7 @@
     private Controls.ClickStatistics clickStatistics1;
     private Controls.RepeaterProgress repeaterProgress1;
     private Button btnReset;
+    private Label lblStartStop;
+    private Label label1;
   }
 }
