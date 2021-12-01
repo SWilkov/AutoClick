@@ -54,7 +54,7 @@ namespace AutoClick.Extensions
           },
           {
             ClickTimeFrame.Repeat,
-            new Services.Timer.TimeService(
+            new Services.Timer.RepeaterTimeService(
               sp.GetRequiredService<ICommandHandler<TimerIntervalCommand>>(),              
               sp.GetRequiredService<IMouseActionService>(),
               sp.GetRequiredService<ITimerPublisher>())
