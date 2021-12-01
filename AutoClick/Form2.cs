@@ -217,7 +217,7 @@ namespace AutoClick
     }
     private void SetStopText()
     {
-      this.btnStop.Text = $"Stop (Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
+      this.lblStartStop.Text = $"(Ctrl/\n{(VirtualKeyCodes)_userSettingsService.GetStopKey()})";
     }
     #endregion
   }
