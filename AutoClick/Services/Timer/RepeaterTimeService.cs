@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AutoClick.Services.Timer
 {
-  public class TimeService : ITimeService
+  public class RepeaterTimeService : ITimeService
   {
     private System.Windows.Forms.Timer _intervalTimer;
     private readonly ICommandHandler<TimerIntervalCommand> _intervalHandler;
@@ -23,7 +23,7 @@ namespace AutoClick.Services.Timer
 
     //private readonly IStatsService _statsService;
 
-    public TimeService(//AutoClickTimer timer,
+    public RepeaterTimeService(//AutoClickTimer timer,
       ICommandHandler<TimerIntervalCommand> intervalHandler,
       IMouseActionService mouseActionService,
       ITimerPublisher timerPublisher)
