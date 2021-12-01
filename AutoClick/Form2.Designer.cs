@@ -39,6 +39,8 @@
       this.numX = new System.Windows.Forms.NumericUpDown();
       this.chkCurrentLocation = new System.Windows.Forms.CheckBox();
       this.grpBoxActions = new System.Windows.Forms.GroupBox();
+      this.lblStartStop = new System.Windows.Forms.Label();
+      this.label1 = new System.Windows.Forms.Label();
       this.btnHotKey = new System.Windows.Forms.Button();
       this.lblErrorMessage = new System.Windows.Forms.Label();
       this.grpBoxLocation = new System.Windows.Forms.GroupBox();
@@ -47,8 +49,6 @@
       this.clickStatistics1 = new AutoClick.Controls.ClickStatistics();
       this.repeaterProgress1 = new AutoClick.Controls.RepeaterProgress();
       this.btnReset = new System.Windows.Forms.Button();
-      this.label1 = new System.Windows.Forms.Label();
-      this.lblStartStop = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
       this.grpBoxActions.SuspendLayout();
@@ -151,6 +151,27 @@
       this.grpBoxActions.TabIndex = 11;
       this.grpBoxActions.TabStop = false;
       // 
+      // lblStartStop
+      // 
+      this.lblStartStop.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+      this.lblStartStop.ForeColor = System.Drawing.SystemColors.Highlight;
+      this.lblStartStop.Location = new System.Drawing.Point(370, 217);
+      this.lblStartStop.MinimumSize = new System.Drawing.Size(200, 50);
+      this.lblStartStop.Name = "lblStartStop";
+      this.lblStartStop.Size = new System.Drawing.Size(200, 50);
+      this.lblStartStop.TabIndex = 26;
+      this.lblStartStop.Text = "label2";
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+      this.label1.Location = new System.Drawing.Point(47, 223);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(296, 37);
+      this.label1.TabIndex = 25;
+      this.label1.Text = "Current Start/Stop Key:";
+      // 
       // btnHotKey
       // 
       this.btnHotKey.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -249,24 +270,6 @@
       this.btnReset.Text = "Reset";
       this.btnReset.UseVisualStyleBackColor = true;
       this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-      // 
-      // label1
-      // 
-      this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(92, 223);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(374, 46);
-      this.label1.TabIndex = 25;
-      this.label1.Text = "Current Start/Stop Key:";
-      // 
-      // lblStartStop
-      // 
-      this.lblStartStop.AutoSize = true;
-      this.lblStartStop.Location = new System.Drawing.Point(487, 228);
-      this.lblStartStop.Name = "lblStartStop";
-      this.lblStartStop.Size = new System.Drawing.Size(112, 46);
-      this.lblStartStop.TabIndex = 26;
-      this.lblStartStop.Text = "label2";
       // 
       // formAutoClick
       // 
